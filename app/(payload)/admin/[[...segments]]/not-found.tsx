@@ -4,5 +4,10 @@ import { NotFoundPage } from '@payloadcms/next/views'
 import { importMap } from '../importMap.js'
 
 export default function NotFound() {
-  return NotFoundPage({ config, importMap })
+  return NotFoundPage({
+    config,
+    importMap,
+    params: Promise.resolve({ segments: [] }),
+    searchParams: Promise.resolve({}),
+  })
 }

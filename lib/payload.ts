@@ -25,11 +25,9 @@ export async function getActiveHero() {
 
 export async function getMenuItems(category?: string) {
   const payload = await getPayloadClient()
-  const where: Record<string, unknown> = {
+  const where: import('payload').Where = {
     available: { equals: true },
-  }
-  if (category) {
-    where.category = { equals: category }
+    ...(category ? { category: { equals: category } } : {}),
   }
   const result = await payload.find({
     collection: 'menu-items',

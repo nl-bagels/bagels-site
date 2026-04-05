@@ -42,7 +42,11 @@ export default buildConfig({
   globals: [SiteSettings],
   db: postgresAdapter({
     pool: {
+      // Use unpooled connection: Payload manages its own pool and needs session-level
+      // features for migrations. The pooled URL (pgBouncer) uses transaction mode
+      // which breaks prepared statements and DDL.
       connectionString:
+        process.env.DATABASE_URL_UNPOOLED ||
         process.env.DATABASE_URL ||
         "postgresql://localhost:5432/netherlands_bagels",
     },

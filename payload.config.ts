@@ -6,15 +6,15 @@ import { mcpPlugin } from "@payloadcms/plugin-mcp";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { Media } from "./payload/collections/Media";
-import { HeroBlocks } from "./payload/collections/HeroBlocks";
-import { MenuItems } from "./payload/collections/MenuItems";
-import { MenuCategories } from "./payload/collections/MenuCategories";
-import { Jobs } from "./payload/collections/Jobs";
-import { Pages } from "./payload/collections/Pages";
-import { SiteSettings } from "./payload/globals/SiteSettings";
-import { Navigation } from "./payload/globals/Navigation";
-import { FooterContent } from "./payload/globals/FooterContent";
+import { Media } from "./payload/collections/Media.ts";
+import { HeroBlocks } from "./payload/collections/HeroBlocks.ts";
+import { MenuItems } from "./payload/collections/MenuItems.ts";
+import { MenuCategories } from "./payload/collections/MenuCategories.ts";
+import { Jobs } from "./payload/collections/Jobs.ts";
+import { Pages } from "./payload/collections/Pages.ts";
+import { SiteSettings } from "./payload/globals/SiteSettings.ts";
+import { Navigation } from "./payload/globals/Navigation.ts";
+import { FooterContent } from "./payload/globals/FooterContent.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 
 interface FooterProps {
   address?: string
@@ -8,13 +9,14 @@ interface FooterProps {
   facebookUrl?: string
 }
 
-export default function Footer({
+export default async function Footer({
   address = 'Korte Molenstraat 11A, 2513 BH Den Haag',
   phone = '+31 12 345 6789',
   email = 'hello@netherlandsbagels.com',
   instagramUrl = '#',
   facebookUrl = '#',
 }: FooterProps) {
+  const t = await getTranslations('footer')
   const currentYear = new Date().getFullYear()
 
   return (
@@ -26,13 +28,13 @@ export default function Footer({
             <div className="w-16 h-16 bg-[#3a7d44] rounded-full flex items-center justify-center mb-5">
               <span className="text-white font-bold text-sm">NB</span>
             </div>
-            <p className="text-[#99a1af] text-base leading-6">No-Nonsense New York Bagels</p>
-            <p className="text-[#99a1af] text-base leading-6">Since 2020</p>
+            <p className="text-[#99a1af] text-base leading-6">{t('tagline')}</p>
+            <p className="text-[#99a1af] text-base leading-6">{t('since')}</p>
           </div>
 
           {/* Contact */}
           <div className="lg:w-[384px] shrink-0 lg:ml-8">
-            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">Contact</h4>
+            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{t('contact')}</h4>
             <div className="flex flex-col gap-2">
               {address.split(',').map((line, i) => (
                 <p key={i} className="text-[#99a1af] text-base">{line.trim()}</p>
@@ -44,7 +46,7 @@ export default function Footer({
 
           {/* Follow */}
           <div className="lg:w-[384px] shrink-0 lg:ml-8">
-            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">Follow Us</h4>
+            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{t('followUs')}</h4>
             <div className="flex gap-4">
               <a
                 href={instagramUrl}
@@ -74,13 +76,13 @@ export default function Footer({
 
         {/* Bottom bar */}
         <div className="border-t border-[#1e2939] py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[#99a1af] text-sm">© {currentYear} Netherlands Bagels. All rights reserved.</p>
+          <p className="text-[#99a1af] text-sm">{t('copyright', { year: currentYear })}</p>
           <div className="flex gap-6">
             <Link href="/terms" className="text-[#99a1af] text-sm hover:text-white transition-colors">
-              Terms of Use
+              {t('terms')}
             </Link>
             <Link href="/privacy" className="text-[#99a1af] text-sm hover:text-white transition-colors">
-              Privacy Policy
+              {t('privacy')}
             </Link>
           </div>
         </div>

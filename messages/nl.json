@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "menu": "Menu",
+    "about": "Over ons",
+    "catering": "Catering",
+    "jobs": "Vacatures",
+    "contact": "Contact",
+    "reserve": "Reserveer een tafel →",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten",
+    "switchLang": "EN"
+  },
+  "hero": {
+    "title": "New Yorkse Bagels in Den Haag",
+    "subtitle": "Met de hand gemaakt, gekookt en dagelijks vers gebakken",
+    "cta": "Maak een reservering"
+  },
+  "about": {
+    "heading": "No-Nonsense\nNew Yorkse Bagels",
+    "p1": "Sinds 2020 brengen wij authentieke New Yorkse bagels naar Den Haag. Onze bagels worden met de hand gerold, gekookt en dagelijks vers gebakken met traditionele methoden en 100% halal, natuurlijke ingrediënten.",
+    "p2": "Wij combineren de directe New Yorkse aanpak met Nederlandse warmte en creëren een plek waar iedereen zich welkom voelt. Geen compromissen, geen shortcuts — gewoon eerlijke, heerlijke bagels zoals ze horen te zijn.",
+    "photoSoon": "Foto komt binnenkort",
+    "usps": {
+      "recipe": "NY Recept",
+      "natural": "100% Natuurlijk",
+      "halal": "100% Halal",
+      "catering": "Catering"
+    }
+  },
+  "menuPreview": {
+    "heading": "Ons Menu",
+    "subtitle": "Ontdek ons assortiment handgemaakte bagels en meer",
+    "viewFull": "Bekijk volledig menu",
+    "categories": {
+      "savory": {
+        "label": "Hartig",
+        "description": "Klassieke bagelsandwiches met verse ingrediënten"
+      },
+      "sweet": {
+        "label": "Zoet",
+        "description": "Heerlijke bagels en zoete lekkernijen"
+      },
+      "loose_bagels": {
+        "label": "Losse Bagels",
+        "description": "Verse bagels om mee naar huis te nemen"
+      },
+      "drinks": {
+        "label": "Dranken",
+        "description": "Koffie, thee en speciale dranken"
+      }
+    }
+  },
+  "catering": {
+    "heading": "Catering",
+    "subtitle": "Breng de smaak van New York naar uw volgende evenement. Wij bieden cateringpakketten voor alle gelegenheden.",
+    "cta": "Neem contact op voor catering",
+    "packages": {
+      "basic": {
+        "name": "Basic",
+        "subtitle": "Perfect voor kleine bijeenkomsten",
+        "items": ["Gevarieerde bagels", "Roomkaasselectie", "Verse koffie"]
+      },
+      "super": {
+        "name": "Super",
+        "subtitle": "Ideaal voor teammeetings",
+        "items": ["Premium bagelselectie", "Meerdere spreads", "Koffie & thee", "Vers fruit"]
+      },
+      "brunch": {
+        "name": "Brunch",
+        "subtitle": "Complete brunchervaring",
+        "items": ["Bagelsandwiches", "Zoete lekkernijen", "Volledige drankenservice", "Seizoenssalades"]
+      },
+      "deluxe": {
+        "name": "Deluxe",
+        "subtitle": "Ultiem cateringpakket",
+        "items": ["Op maat menu", "Premium ingrediënten", "Volledige opzet", "Toegewijde service"]
+      }
+    }
+  },
+  "location": {
+    "heading": "Bezoek Ons",
+    "address": "Adres",
+    "hours": "Openingstijden",
+    "contact": "Contact",
+    "days": {
+      "weekdays": "Maandag – Vrijdag",
+      "saturday": "Zaterdag",
+      "sunday": "Zondag"
+    },
+    "whatsapp": "WhatsApp"
+  },
+  "jobs": {
+    "heading": "Kom bij Ons Team",
+    "subtitle": "We zijn altijd op zoek naar gepassioneerde mensen die van eten en gastvrijheid houden. Als je deel wilt uitmaken van ons team, horen wij graag van je.",
+    "applyNow": "Solliciteer nu →",
+    "openApplication": "Stuur een open sollicitatie",
+    "sendCV": "Stuur ons je cv",
+    "applicationSubject": "Sollicitatie: ",
+    "openApplicationSubject": "Open Sollicitatie"
+  },
+  "footer": {
+    "tagline": "No-Nonsense New Yorkse Bagels",
+    "since": "Sinds 2020",
+    "contact": "Contact",
+    "followUs": "Volg Ons",
+    "copyright": "© {year} Netherlands Bagels. Alle rechten voorbehouden.",
+    "terms": "Gebruiksvoorwaarden",
+    "privacy": "Privacybeleid"
+  },
+  "menuPage": {
+    "heading": "Ons Menu",
+    "subtitle": "Met liefde gemaakt, dagelijks vers gebakken",
+    "allergiesHeading": "Allergieën & Info",
+    "allergiesText": "Informeer ons vóór het bestellen over eventuele allergieën. Onze keuken is NIET veilig voor coeliakie. Al onze producten zijn 100% halal. Prijzen kunnen variëren — raadpleeg de actuele menukaart in de winkel.",
+    "allergiesNotSafe": "NIET",
+    "metadata": {
+      "title": "Menu | Netherlands Bagels",
+      "description": "Bekijk ons volledige menu: hartige bagelsandwiches, zoete lekkernijen, losse bagels, dranken en cateringopties. Alles 100% halal."
+    }
+  },
+  "menuItem": {
+    "unavailable": "(Momenteel niet beschikbaar)",
+    "tags": {
+      "vegan": "Vegan",
+      "new": "Nieuw",
+      "popular": "Populair",
+      "seasonal": "Seizoen",
+      "gluten_free": "GV"
+    }
+  },
+  "metadata": {
+    "title": "Netherlands Bagels | New Yorkse Bagels in Den Haag",
+    "description": "Dagelijks vers gebakken New Yorkse bagels in Den Haag. Dineren, afhalen en catering. 100% Halal."
+  }
+}

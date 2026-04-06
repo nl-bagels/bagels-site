@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 interface LocationProps {
   address?: string
   phone?: string
@@ -5,19 +7,26 @@ interface LocationProps {
   email?: string
 }
 
-export default function Location({
+export default async function Location({
   address = 'Korte Molenstraat 11A, 2513 BH Den Haag, The Netherlands',
   phone = '+31 12 345 6789',
   whatsapp,
   email = 'hello@netherlandsbagels.com',
 }: LocationProps) {
+  const t = await getTranslations('location')
   const addressLines = address.split(',').map((l) => l.trim())
+
+  const hours = [
+    { day: t('days.weekdays'), hours: '7:00 – 18:00' },
+    { day: t('days.saturday'), hours: '8:00 – 18:00' },
+    { day: t('days.sunday'), hours: '8:00 – 17:00' },
+  ]
 
   return (
     <section id="contact" className="bg-[#f5f5f5] py-20 lg:py-24">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black text-center mb-12">
-          Visit Us
+          {t('heading')}
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-[48px]">
@@ -41,7 +50,7 @@ export default function Location({
             {/* Address */}
             <div>
               <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
-                Address
+                {t('address')}
               </h3>
               <div className="flex flex-col gap-1">
                 {addressLines.map((line, i) => (
@@ -55,17 +64,13 @@ export default function Location({
             {/* Hours */}
             <div>
               <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
-                Hours
+                {t('hours')}
               </h3>
               <div className="flex flex-col gap-2 max-w-sm">
-                {[
-                  { day: 'Monday - Friday', hours: '7:00 AM – 6:00 PM' },
-                  { day: 'Saturday', hours: '8:00 AM – 6:00 PM' },
-                  { day: 'Sunday', hours: '8:00 AM – 5:00 PM' },
-                ].map(({ day, hours }) => (
+                {hours.map(({ day, hours: h }) => (
                   <div key={day} className="flex justify-between gap-8">
                     <span className="font-['Inter',sans-serif] font-medium text-base text-black whitespace-nowrap">{day}</span>
-                    <span className="font-['Inter',sans-serif] text-base text-[#4a5565] whitespace-nowrap">{hours}</span>
+                    <span className="font-['Inter',sans-serif] text-base text-[#4a5565] whitespace-nowrap">{h}</span>
                   </div>
                 ))}
               </div>
@@ -74,7 +79,7 @@ export default function Location({
             {/* Contact */}
             <div>
               <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
-                Contact
+                {t('contact')}
               </h3>
               <div className="flex flex-col gap-2">
                 <a
@@ -90,7 +95,7 @@ export default function Location({
                     rel="noopener noreferrer"
                     className="font-['Inter',sans-serif] text-base text-[#3a7d44] hover:underline"
                   >
-                    WhatsApp
+                    {t('whatsapp')}
                   </a>
                 )}
                 <a

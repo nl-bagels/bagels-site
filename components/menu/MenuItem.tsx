@@ -1,12 +1,5 @@
 import Image from 'next/image'
-
-const TAG_LABELS: Record<string, string> = {
-  vegan: 'Vegan',
-  new: 'New',
-  popular: 'Popular',
-  seasonal: 'Seasonal',
-  gluten_free: 'GF',
-}
+import { getTranslations } from 'next-intl/server'
 
 interface MenuItemProps {
   name: string
@@ -18,7 +11,7 @@ interface MenuItemProps {
   available?: boolean
 }
 
-export default function MenuItem({
+export default async function MenuItem({
   name,
   description,
   price,
@@ -27,6 +20,15 @@ export default function MenuItem({
   notes,
   available = true,
 }: MenuItemProps) {
+  const t = await getTranslations('menuItem')
+
+  const tagColors: Record<string, string> = {
+    vegan: 'bg-green-50 text-green-700',
+    new: 'bg-blue-50 text-blue-700',
+    popular: 'bg-amber-50 text-amber-700',
+    seasonal: 'bg-orange-50 text-orange-700',
+  }
+
   return (
     <div className={`flex gap-4 py-5 border-b border-stone-100 ${!available ? 'opacity-50' : ''}`}>
       {/* Image (optional) */}
@@ -51,7 +53,7 @@ export default function MenuItem({
             </span>
             {!available && (
               <span className="ml-2 text-xs text-stone-400 font-['Inter',sans-serif]">
-                (Currently unavailable)
+                {t('unavailable')}
               </span>
             )}
           </div>
@@ -78,18 +80,10 @@ export default function MenuItem({
               <span
                 key={tag}
                 className={`inline-block px-2 py-0.5 text-xs font-['Inter',sans-serif] font-medium rounded-full ${
-                  tag === 'vegan'
-                    ? 'bg-green-50 text-green-700'
-                    : tag === 'new'
-                    ? 'bg-blue-50 text-blue-700'
-                    : tag === 'popular'
-                    ? 'bg-amber-50 text-amber-700'
-                    : tag === 'seasonal'
-                    ? 'bg-orange-50 text-orange-700'
-                    : 'bg-stone-100 text-stone-600'
+                  tagColors[tag] ?? 'bg-stone-100 text-stone-600'
                 }`}
               >
-                {TAG_LABELS[tag] ?? tag}
+                {t(`tags.${tag}` as Parameters<typeof t>[0]) ?? tag}
               </span>
             ))}
           </div>

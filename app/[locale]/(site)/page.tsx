@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import MenuPreview from '@/components/sections/MenuPreview'
@@ -9,7 +9,14 @@ import { getActiveHero, getOpenJobs, getSiteSettings } from '@/lib/payload'
 
 export const revalidate = 60
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'hero' })
+
   let hero = null
   let openJobs: Awaited<ReturnType<typeof getOpenJobs>> = []
   let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
@@ -34,9 +41,9 @@ export default async function HomePage() {
   return (
     <>
       <Hero
-        title={hero?.title ?? 'New York-style Bagels in The Hague'}
-        subtitle={hero?.subtitle ?? 'Handmade, boiled, baked fresh daily'}
-        ctaLabel={hero?.ctaLabel ?? 'Make a reservation'}
+        title={hero?.title ?? t('title')}
+        subtitle={hero?.subtitle ?? t('subtitle')}
+        ctaLabel={hero?.ctaLabel ?? t('cta')}
         ctaUrl={hero?.ctaUrl ?? settings?.reservationUrl ?? '#'}
         backgroundImageUrl={heroImage}
         backgroundVideo={hero?.backgroundVideo ?? undefined}

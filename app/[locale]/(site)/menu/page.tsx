@@ -1,39 +1,52 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import MenuNav from '@/components/menu/MenuNav'
 import MenuCategory from '@/components/menu/MenuCategory'
 import { getMenuItems, getMenuCategories, getSiteSettings } from '@/lib/payload'
 
 export const revalidate = 60
 
-export const metadata: Metadata = {
-  title: 'Menu | Netherlands Bagels',
-  description:
-    'Explore our full menu: savory bagel sandwiches, sweet treats, loose bagels, drinks and catering options. All 100% halal.',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'menuPage.metadata' })
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
 }
 
-const FALLBACK_CATEGORIES = [
-  { slug: 'savory', label: 'Savory', description: 'Classic bagel sandwiches with fresh ingredients', sortOrder: 0, visible: true },
-  { slug: 'sweet', label: 'Sweet', description: 'Indulgent bagels and sweet treats', sortOrder: 1, visible: true },
-  { slug: 'loose_bagels', label: 'Loose Bagels', description: 'Fresh bagels to take home', sortOrder: 2, visible: true },
-  { slug: 'drinks', label: 'Drinks', description: 'Coffee, tea, and specialty beverages', sortOrder: 3, visible: true },
-  { slug: 'catering', label: 'Catering', description: 'Packages for events and meetings', sortOrder: 4, visible: true },
-]
+const FALLBACK_CATEGORY_SLUGS = ['savory', 'sweet', 'loose_bagels', 'drinks', 'catering'] as const
 
 interface Props {
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ category?: string }>
 }
 
-export default async function MenuPage({ searchParams }: Props) {
-  const params = await searchParams
-  const activeCategory = params.category ?? FALLBACK_CATEGORIES[0].slug
+export default async function MenuPage({ params, searchParams }: Props) {
+  const { locale } = await params
+  const resolvedSearch = await searchParams
+  const t = await getTranslations({ locale, namespace: 'menuPage' })
+  const tCats = await getTranslations({ locale, namespace: 'menuPreview.categories' })
+
+  const FALLBACK_CATEGORIES = [
+    { slug: 'savory', label: tCats('savory.label'), description: tCats('savory.description'), sortOrder: 0, visible: true },
+    { slug: 'sweet', label: tCats('sweet.label'), description: tCats('sweet.description'), sortOrder: 1, visible: true },
+    { slug: 'loose_bagels', label: tCats('loose_bagels.label'), description: tCats('loose_bagels.description'), sortOrder: 2, visible: true },
+    { slug: 'drinks', label: tCats('drinks.label'), description: tCats('drinks.description'), sortOrder: 3, visible: true },
+  ]
+
+  const activeCategory = resolvedSearch.category ?? FALLBACK_CATEGORIES[0].slug
 
   let categories = FALLBACK_CATEGORIES
   let allItems: Awaited<ReturnType<typeof getMenuItems>> = []
-  let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
 
   try {
-    const [rawCategories, items, siteSettings] = await Promise.all([
+    const [rawCategories, items] = await Promise.all([
       getMenuCategories(),
       getMenuItems(),
       getSiteSettings(),
@@ -48,12 +61,10 @@ export default async function MenuPage({ searchParams }: Props) {
       }))
     }
     allItems = items
-    settings = siteSettings
   } catch {
     // DB not available
   }
 
-  // Group items by category
   const itemsByCategory = allItems.reduce<Record<string, typeof allItems>>((acc, item) => {
     const cat = item.category as string
     if (!acc[cat]) acc[cat] = []
@@ -67,10 +78,10 @@ export default async function MenuPage({ searchParams }: Props) {
       <div className="bg-[#f5f5f5] py-16 text-center">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <h1 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[56px] leading-tight text-black">
-            Our Menu
+            {t('heading')}
           </h1>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-lg mt-4">
-            Handcrafted with love, baked fresh daily
+            {t('subtitle')}
           </p>
         </div>
       </div>
@@ -121,12 +132,10 @@ export default async function MenuPage({ searchParams }: Props) {
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <div className="max-w-2xl">
             <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-3">
-              Allergies & Info
+              {t('allergiesHeading')}
             </h3>
             <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-relaxed">
-              Please inform us of any allergies before ordering. Our kitchen is{' '}
-              <strong className="text-black">NOT</strong> safe for celiacs. All our products are
-              100% halal. Prices may vary — please check in-store for the latest menu.
+              {t('allergiesText')}
             </p>
           </div>
         </div>

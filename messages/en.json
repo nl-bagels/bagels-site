@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "menu": "Menu",
+    "about": "About",
+    "catering": "Catering",
+    "jobs": "Jobs",
+    "contact": "Contact",
+    "reserve": "Reserve a table →",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLang": "NL"
+  },
+  "hero": {
+    "title": "New York-style Bagels in The Hague",
+    "subtitle": "Handmade, boiled, baked fresh daily",
+    "cta": "Make a reservation"
+  },
+  "about": {
+    "heading": "No-Nonsense\nNew York Bagels",
+    "p1": "Since 2020, we've been bringing authentic New York-style bagels to The Hague. Our bagels are hand-rolled, boiled, and baked fresh daily using traditional methods and 100% halal, natural ingredients.",
+    "p2": "We combine New York's straightforward approach with Dutch warmth, creating a space where everyone feels welcome. No shortcuts, no compromises—just honest, delicious bagels made the way they should be.",
+    "photoSoon": "Photo coming soon",
+    "usps": {
+      "recipe": "NY Recipe",
+      "natural": "100% Natural",
+      "halal": "100% Halal",
+      "catering": "Catering"
+    }
+  },
+  "menuPreview": {
+    "heading": "Our Menu",
+    "subtitle": "Discover our selection of handcrafted bagels and more",
+    "viewFull": "View Full Menu",
+    "categories": {
+      "savory": {
+        "label": "Savory",
+        "description": "Classic bagel sandwiches with fresh ingredients"
+      },
+      "sweet": {
+        "label": "Sweet",
+        "description": "Indulgent bagels and sweet treats"
+      },
+      "loose_bagels": {
+        "label": "Loose Bagels",
+        "description": "Fresh bagels to take home"
+      },
+      "drinks": {
+        "label": "Drinks",
+        "description": "Coffee, tea, and specialty beverages"
+      }
+    }
+  },
+  "catering": {
+    "heading": "Catering",
+    "subtitle": "Bring the taste of New York to your next event. We offer catering packages for all occasions.",
+    "cta": "Contact us for catering",
+    "packages": {
+      "basic": {
+        "name": "Basic",
+        "subtitle": "Perfect for small gatherings",
+        "items": ["Assorted bagels", "Cream cheese selection", "Fresh coffee"]
+      },
+      "super": {
+        "name": "Super",
+        "subtitle": "Ideal for team meetings",
+        "items": ["Premium bagel selection", "Multiple spreads", "Coffee & tea", "Fresh fruit"]
+      },
+      "brunch": {
+        "name": "Brunch",
+        "subtitle": "Complete brunch experience",
+        "items": ["Bagel sandwiches", "Sweet treats", "Full beverage service", "Seasonal salads"]
+      },
+      "deluxe": {
+        "name": "Deluxe",
+        "subtitle": "Ultimate catering package",
+        "items": ["Custom menu", "Premium ingredients", "Full setup", "Dedicated service"]
+      }
+    }
+  },
+  "location": {
+    "heading": "Visit Us",
+    "address": "Address",
+    "hours": "Hours",
+    "contact": "Contact",
+    "days": {
+      "weekdays": "Monday – Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "whatsapp": "WhatsApp"
+  },
+  "jobs": {
+    "heading": "Join Our Team",
+    "subtitle": "We're always looking for passionate people who love food and hospitality. If you want to be part of our team, we'd love to hear from you.",
+    "applyNow": "Apply now →",
+    "openApplication": "Send open application",
+    "sendCV": "Send us your CV",
+    "applicationSubject": "Application: ",
+    "openApplicationSubject": "Open Application"
+  },
+  "footer": {
+    "tagline": "No-Nonsense New York Bagels",
+    "since": "Since 2020",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "copyright": "© {year} Netherlands Bagels. All rights reserved.",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy"
+  },
+  "menuPage": {
+    "heading": "Our Menu",
+    "subtitle": "Handcrafted with love, baked fresh daily",
+    "allergiesHeading": "Allergies & Info",
+    "allergiesText": "Please inform us of any allergies before ordering. Our kitchen is NOT safe for celiacs. All our products are 100% halal. Prices may vary — please check in-store for the latest menu.",
+    "allergiesNotSafe": "NOT",
+    "metadata": {
+      "title": "Menu | Netherlands Bagels",
+      "description": "Explore our full menu: savory bagel sandwiches, sweet treats, loose bagels, drinks and catering options. All 100% halal."
+    }
+  },
+  "menuItem": {
+    "unavailable": "(Currently unavailable)",
+    "tags": {
+      "vegan": "Vegan",
+      "new": "New",
+      "popular": "Popular",
+      "seasonal": "Seasonal",
+      "gluten_free": "GF"
+    }
+  },
+  "metadata": {
+    "title": "Netherlands Bagels | New York-Style Bagels in The Hague",
+    "description": "Freshly baked New York-style bagels in The Hague. Dine in, takeaway and catering. 100% Halal."
+  }
+}

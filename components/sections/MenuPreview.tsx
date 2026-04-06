@@ -1,44 +1,29 @@
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 
-const categories = [
-  {
-    slug: 'savory',
-    label: 'Savory',
-    description: 'Classic bagel sandwiches with fresh ingredients',
-    imageUrl: null as string | null,
-  },
-  {
-    slug: 'sweet',
-    label: 'Sweet',
-    description: 'Indulgent bagels and sweet treats',
-    imageUrl: null as string | null,
-  },
-  {
-    slug: 'loose_bagels',
-    label: 'Loose Bagels',
-    description: 'Fresh bagels to take home',
-    imageUrl: null as string | null,
-  },
-  {
-    slug: 'drinks',
-    label: 'Drinks',
-    description: 'Coffee, tea, and specialty beverages',
-    imageUrl: null as string | null,
-  },
-]
+const categorySlugs = ['savory', 'sweet', 'loose_bagels', 'drinks'] as const
 
-export default function MenuPreview() {
+export default async function MenuPreview() {
+  const t = await getTranslations('menuPreview')
+
+  const categories = categorySlugs.map((slug) => ({
+    slug,
+    label: t(`categories.${slug}.label`),
+    description: t(`categories.${slug}.description`),
+    imageUrl: null as string | null,
+  }))
+
   return (
     <section id="menu" className="bg-[#f5f5f5] py-20 lg:py-24">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
-            Our Menu
+            {t('heading')}
           </h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px]">
-            Discover our selection of handcrafted bagels and more
+            {t('subtitle')}
           </p>
         </div>
 
@@ -86,7 +71,7 @@ export default function MenuPreview() {
             href="/menu"
             className="bg-black text-white px-10 py-4 text-base font-['Inter',sans-serif] hover:bg-stone-800 transition-colors"
           >
-            View Full Menu
+            {t('viewFull')}
           </Link>
         </div>
       </div>

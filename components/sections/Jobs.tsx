@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 interface Job {
   id: string
   title: string
@@ -9,7 +11,8 @@ interface JobsProps {
   contactEmail?: string
 }
 
-export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagels.com' }: JobsProps) {
+export default async function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagels.com' }: JobsProps) {
+  const t = await getTranslations('jobs')
   const hasOpenJobs = jobs.length > 0
 
   return (
@@ -17,11 +20,10 @@ export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagel
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         <div className="text-center max-w-[832px] mx-auto">
           <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-6">
-            Join Our Team
+            {t('heading')}
           </h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px] leading-[30.6px] mb-10">
-            We&apos;re always looking for passionate people who love food and hospitality.
-            If you want to be part of our team, we&apos;d love to hear from you.
+            {t('subtitle')}
           </p>
 
           {hasOpenJobs ? (
@@ -37,10 +39,10 @@ export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagel
                     </p>
                   )}
                   <a
-                    href={`mailto:${contactEmail}?subject=Application: ${encodeURIComponent(job.title)}`}
+                    href={`mailto:${contactEmail}?subject=${encodeURIComponent(t('applicationSubject') + job.title)}`}
                     className="inline-block mt-4 text-[#3a7d44] font-['Inter',sans-serif] text-sm font-medium hover:underline"
                   >
-                    Apply now →
+                    {t('applyNow')}
                   </a>
                 </div>
               ))}
@@ -48,10 +50,10 @@ export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagel
           ) : null}
 
           <a
-            href={`mailto:${contactEmail}?subject=Open Application`}
+            href={`mailto:${contactEmail}?subject=${encodeURIComponent(t('openApplicationSubject'))}`}
             className="inline-block bg-black text-white px-10 py-4 text-base font-['Inter',sans-serif] hover:bg-stone-800 transition-colors"
           >
-            {hasOpenJobs ? 'Send open application' : 'Send us your CV'}
+            {hasOpenJobs ? t('openApplication') : t('sendCV')}
           </a>
         </div>
       </div>

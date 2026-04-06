@@ -1,30 +1,42 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { useLocale } from 'next-intl'
 
 interface HeaderProps {
   reservationUrl?: string
 }
 
-const navLinks = [
-  { label: 'Menu', href: '/menu' },
-  { label: 'About', href: '/#about' },
-  { label: 'Catering', href: '/#catering' },
-  { label: 'Jobs', href: '/#jobs' },
-  { label: 'Contact', href: '/#contact' },
-]
-
 export default function Header({ reservationUrl = '#' }: HeaderProps) {
+  const t = useTranslations('nav')
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const navLinks = [
+    { label: t('menu'), href: '/menu' as const },
+    { label: t('about'), href: '/#about' as const },
+    { label: t('catering'), href: '/#catering' as const },
+    { label: t('jobs'), href: '/#jobs' as const },
+    { label: t('contact'), href: '/#contact' as const },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  function switchLocale() {
+    const nextLocale = locale === 'en' ? 'nl' : 'en'
+    router.replace(pathname, { locale: nextLocale })
+  }
 
   return (
     <header
@@ -51,13 +63,23 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
               {link.label}
             </Link>
           ))}
+
+          {/* Language switcher */}
+          <button
+            onClick={switchLocale}
+            className="text-base text-black font-['Inter',sans-serif] transition-colors hover:text-[#3a7d44] border border-black/20 px-3 py-1 rounded-sm"
+            aria-label={`Switch to ${locale === 'en' ? 'Dutch' : 'English'}`}
+          >
+            {t('switchLang')}
+          </button>
+
           <a
             href={reservationUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#3a7d44] text-white px-6 py-2.5 text-base font-['Inter',sans-serif] hover:bg-[#2d6235] transition-colors"
           >
-            Reserve a table →
+            {t('reserve')}
           </a>
         </nav>
 
@@ -65,7 +87,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
         <button
           className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen(true)}
-          aria-label="Open menu"
+          aria-label={t('openMenu')}
         >
           <span className="block w-6 h-0.5 bg-black" />
           <span className="block w-6 h-0.5 bg-black" />
@@ -84,7 +106,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
             <button
               className="self-end text-2xl leading-none"
               onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
+              aria-label={t('closeMenu')}
             >
               ×
             </button>
@@ -98,13 +120,20 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
+            {/* Mobile language switcher */}
+            <button
+              onClick={() => { switchLocale(); setMobileOpen(false) }}
+              className="text-left text-lg text-black hover:text-[#3a7d44] transition-colors font-['Inter',sans-serif]"
+            >
+              {t('switchLang')} — {locale === 'en' ? 'Nederlands' : 'English'}
+            </button>
             <a
               href={reservationUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-auto bg-[#3a7d44] text-white px-6 py-3 text-base text-center font-['Inter',sans-serif]"
             >
-              Reserve a table →
+              {t('reserve')}
             </a>
           </div>
         </div>

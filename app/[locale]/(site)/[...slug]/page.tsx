@@ -10,8 +10,11 @@ export async function generateStaticParams() {
   try {
     const pages = await getAllPublishedPages()
     return pages
-      .filter((p) => p.slug && !RESERVED_SLUGS.includes(p.slug) && p.slug !== '/')
-      .map((p) => ({ slug: (p.slug as string).split('/').filter(Boolean) }))
+      .filter((p) => {
+        const s = (p as any).slug as string | null | undefined
+        return s && !RESERVED_SLUGS.includes(s) && s !== '/'
+      })
+      .map((p) => ({ slug: ((p as any).slug as string).split('/').filter(Boolean) }))
   } catch {
     return []
   }

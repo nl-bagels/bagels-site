@@ -1,4 +1,3 @@
-import type { Page } from '@/payload-types'
 import HeroBlockComponent from './HeroBlockComponent'
 import AboutBlockComponent from './AboutBlockComponent'
 import MenuPreviewBlockComponent from './MenuPreviewBlockComponent'
@@ -10,10 +9,8 @@ import CTABlockComponent from './CTABlockComponent'
 import MenuPageHeaderBlockComponent from './MenuPageHeaderBlockComponent'
 import AllergiesNoteBlockComponent from './AllergiesNoteBlockComponent'
 
-type LayoutBlock = NonNullable<Page['layout']>[number]
-
 interface BlockRendererProps {
-  blocks: LayoutBlock[]
+  blocks: any[]
   siteSettings?: any
   openJobs?: any[]
 }

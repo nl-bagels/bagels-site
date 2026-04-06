@@ -11,7 +11,10 @@ import { HeroBlocks } from "./payload/collections/HeroBlocks";
 import { MenuItems } from "./payload/collections/MenuItems";
 import { MenuCategories } from "./payload/collections/MenuCategories";
 import { Jobs } from "./payload/collections/Jobs";
+import { Pages } from "./payload/collections/Pages";
 import { SiteSettings } from "./payload/globals/SiteSettings";
+import { Navigation } from "./payload/globals/Navigation";
+import { FooterContent } from "./payload/globals/FooterContent";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -39,21 +42,17 @@ export default buildConfig({
     MenuItems,
     MenuCategories,
     Jobs,
+    Pages,
     {
       slug: "users",
       auth: true,
-      admin: {
-        useAsTitle: "email",
-      },
+      admin: { useAsTitle: "email" },
       fields: [],
     },
   ],
-  globals: [SiteSettings],
+  globals: [SiteSettings, Navigation, FooterContent],
   db: postgresAdapter({
     pool: {
-      // Use unpooled connection: Payload manages its own pool and needs session-level
-      // features for migrations. The pooled URL (pgBouncer) uses transaction mode
-      // which breaks prepared statements and DDL.
       connectionString:
         process.env.DATABASE_URL_UNPOOLED ||
         process.env.DATABASE_URL ||
@@ -68,10 +67,13 @@ export default buildConfig({
         'menu-categories': { enabled: true },
         jobs: { enabled: true },
         media: { enabled: true },
+        pages: { enabled: true },
         users: { enabled: false },
       },
       globals: {
         'site-settings': { enabled: true },
+        'navigation': { enabled: true },
+        'footer-content': { enabled: true },
       },
     }),
     ...(process.env.BLOB_READ_WRITE_TOKEN

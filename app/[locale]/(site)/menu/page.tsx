@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import MenuNav from '@/components/menu/MenuNav'
 import MenuCategory from '@/components/menu/MenuCategory'
-import { getMenuItems, getMenuCategories, getSiteSettings } from '@/lib/payload'
+import { getMenuItems, getMenuCategories, getSiteSettings, getPageBySlug } from '@/lib/payload'
 
 export const revalidate = 60
 
@@ -47,11 +47,14 @@ export default async function MenuPage({ params, searchParams }: Props) {
 
   const payloadLocale = (locale === 'nl' ? 'nl' : 'en') as 'en' | 'nl'
 
+  // CMS-driven header/allergy note from Pages collection
+  let menuPage: Awaited<ReturnType<typeof getPageBySlug>> | null = null
+
   try {
-    const [rawCategories, items] = await Promise.all([
+    const [rawCategories, items, cmsMenuPage] = await Promise.all([
       getMenuCategories(payloadLocale),
       getMenuItems(undefined, payloadLocale),
-      getSiteSettings(),
+      getPageBySlug('menu', payloadLocale),
     ])
     if (rawCategories.length > 0) {
       categories = rawCategories.map((c) => ({
@@ -63,6 +66,7 @@ export default async function MenuPage({ params, searchParams }: Props) {
       }))
     }
     allItems = items
+    menuPage = cmsMenuPage
   } catch {
     // DB not available
   }
@@ -74,16 +78,21 @@ export default async function MenuPage({ params, searchParams }: Props) {
     return acc
   }, {})
 
+  // Extract header and allergy note blocks from CMS page if available
+  const cmsLayout = (menuPage?.layout ?? []) as any[]
+  const headerBlock = cmsLayout.find((b: any) => b.blockType === 'menuPageHeaderBlock')
+  const allergiesBlock = cmsLayout.find((b: any) => b.blockType === 'allergiesNoteBlock')
+
   return (
     <>
-      {/* Page hero */}
-      <div className="bg-[#f5f5f5] py-16 text-center">
+      {/* Page hero — CMS-driven or fallback */}
+      <div className={`${headerBlock?.background === 'white' ? 'bg-white' : 'bg-[#f5f5f5]'} py-16 text-center`}>
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <h1 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[56px] leading-tight text-black">
-            {t('heading')}
+            {headerBlock?.heading ?? t('heading')}
           </h1>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-lg mt-4">
-            {t('subtitle')}
+            {headerBlock?.subtitle ?? t('subtitle')}
           </p>
         </div>
       </div>
@@ -129,15 +138,15 @@ export default async function MenuPage({ params, searchParams }: Props) {
         })}
       </div>
 
-      {/* Allergy note */}
+      {/* Allergy note — CMS-driven or fallback */}
       <div className="bg-[#f5f5f5] py-12 mt-8">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <div className="max-w-2xl">
             <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-3">
-              {t('allergiesHeading')}
+              {allergiesBlock?.heading ?? t('allergiesHeading')}
             </h3>
             <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-relaxed">
-              {t('allergiesText')}
+              {allergiesBlock?.body ?? t('allergiesText')}
             </p>
           </div>
         </div>

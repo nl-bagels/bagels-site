@@ -5,7 +5,8 @@ import MenuPreview from '@/components/sections/MenuPreview'
 import Catering from '@/components/sections/Catering'
 import Location from '@/components/sections/Location'
 import Jobs from '@/components/sections/Jobs'
-import { getActiveHero, getOpenJobs, getSiteSettings } from '@/lib/payload'
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import { getActiveHero, getOpenJobs, getSiteSettings, getPageBySlug } from '@/lib/payload'
 
 export const revalidate = 60
 
@@ -16,21 +17,37 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'hero' })
+  const payloadLocale = (locale === 'nl' ? 'nl' : 'en') as 'en' | 'nl'
 
   let hero = null
   let openJobs: Awaited<ReturnType<typeof getOpenJobs>> = []
   let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
+  let homePage = null
 
   try {
-    ;[hero, openJobs, settings] = await Promise.all([
+    ;[hero, openJobs, settings, homePage] = await Promise.all([
       getActiveHero(),
       getOpenJobs(),
-      getSiteSettings(),
+      getSiteSettings(payloadLocale),
+      getPageBySlug('/', payloadLocale),
     ])
   } catch {
     // DB not available in dev without env vars
   }
 
+  // If a published homepage page exists in Payload with layout blocks, use BlockRenderer
+  const layout = (homePage?.layout ?? []) as any[]
+  if (layout.length > 0) {
+    return (
+      <BlockRenderer
+        blocks={layout}
+        siteSettings={settings}
+        openJobs={openJobs.map((j) => ({ id: String(j.id), title: j.title }))}
+      />
+    )
+  }
+
+  // Legacy fallback: render hardcoded sections
   const heroImage =
     hero?.backgroundImage &&
     typeof hero.backgroundImage === 'object' &&

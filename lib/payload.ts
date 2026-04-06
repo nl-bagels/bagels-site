@@ -10,9 +10,9 @@ export async function getPayloadClient() {
 
 // Typed fetch helpers
 
-export async function getSiteSettings() {
+export async function getSiteSettings(locale: Locale = 'en') {
   const payload = await getPayloadClient()
-  return payload.findGlobal({ slug: 'site-settings' })
+  return payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: 'en' })
 }
 
 export async function getActiveHero() {
@@ -62,6 +62,43 @@ export async function getOpenJobs() {
     where: { isOpen: { equals: true } },
     sort: '-publishedAt',
     limit: 20,
+  })
+  return result.docs
+}
+
+export async function getNavigation(locale: Locale = 'en') {
+  const payload = await getPayloadClient()
+  return payload.findGlobal({ slug: 'navigation', locale, fallbackLocale: 'en' })
+}
+
+export async function getFooterContent(locale: Locale = 'en') {
+  const payload = await getPayloadClient()
+  return payload.findGlobal({ slug: 'footer-content', locale, fallbackLocale: 'en' })
+}
+
+export async function getPageBySlug(slug: string, locale: Locale = 'en') {
+  const payload = await getPayloadClient()
+  const result = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: slug },
+      status: { equals: 'published' },
+    },
+    limit: 1,
+    locale,
+    fallbackLocale: 'en',
+    depth: 3,
+  })
+  return result.docs[0] ?? null
+}
+
+export async function getAllPublishedPages() {
+  const payload = await getPayloadClient()
+  const result = await payload.find({
+    collection: 'pages',
+    where: { status: { equals: 'published' } },
+    limit: 1000,
+    select: { slug: true },
   })
   return result.docs
 }

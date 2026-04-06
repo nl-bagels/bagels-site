@@ -1,0 +1,59 @@
+export default function LocationBlockComponent({ block, siteSettings }: { block: any; siteSettings?: any }) {
+  const address = siteSettings?.address ?? 'Korte Molenstraat 11A, 2513 BH Den Haag'
+  const phone = siteSettings?.phone ?? ''
+  const whatsapp = siteSettings?.whatsapp
+  const email = siteSettings?.contactEmail ?? ''
+  const mapUrl = block.mapEmbedUrl ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.4!2d4.315!3d52.077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5b7a1%3A0x123456!2sKorte%20Molenstraat%2011A%2C%202513%20BH%20Den%20Haag!5e0!3m2!1sen!2snl!4v1'
+  const addressLines = address.split(',').map((l: string) => l.trim())
+  const openingHours: Array<{ dayLabel: string; hours: string }> = siteSettings?.openingHours ?? []
+
+  return (
+    <section id="contact" className="bg-[#f5f5f5] py-20 lg:py-24">
+      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+        <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black text-center mb-12">
+          {block.heading}
+        </h2>
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-[48px]">
+          <div className="w-full lg:w-[584px] shrink-0">
+            <iframe src={mapUrl} width="100%" height="400" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Netherlands Bagels location" className="w-full h-[300px] lg:h-[400px]" />
+          </div>
+          <div className="flex flex-col gap-8 flex-1">
+            <div>
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">{block.addressLabel ?? 'Address'}</h3>
+              <div className="flex flex-col gap-1">
+                {addressLines.map((line: string, i: number) => (
+                  <p key={i} className="font-['Inter',sans-serif] text-[18px] leading-7 text-black">{line}</p>
+                ))}
+              </div>
+            </div>
+            {openingHours.length > 0 && (
+              <div>
+                <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">{block.hoursLabel ?? 'Hours'}</h3>
+                <div className="flex flex-col gap-2 max-w-sm">
+                  {openingHours.map(({ dayLabel, hours }, i) => (
+                    <div key={i} className="flex justify-between gap-8">
+                      <span className="font-['Inter',sans-serif] font-medium text-base text-black whitespace-nowrap">{dayLabel}</span>
+                      <span className="font-['Inter',sans-serif] text-base text-[#4a5565] whitespace-nowrap">{hours}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div>
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">{block.contactLabel ?? 'Contact'}</h3>
+              <div className="flex flex-col gap-2">
+                {phone && <a href={`tel:${phone.replace(/\s/g, '')}`} className="font-['Inter',sans-serif] text-base text-[#3a7d44] hover:underline">{phone}</a>}
+                {whatsapp && (
+                  <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="font-['Inter',sans-serif] text-base text-[#3a7d44] hover:underline">
+                    {block.whatsappLabel ?? 'WhatsApp'}
+                  </a>
+                )}
+                {email && <a href={`mailto:${email}`} className="font-['Inter',sans-serif] text-base text-[#3a7d44] hover:underline">{email}</a>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

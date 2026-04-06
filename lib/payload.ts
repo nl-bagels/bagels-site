@@ -1,6 +1,8 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
+type Locale = 'en' | 'nl'
+
 // Singleton payload instance for server-side use
 export async function getPayloadClient() {
   return getPayload({ config: configPromise })
@@ -23,7 +25,7 @@ export async function getActiveHero() {
   return result.docs[0] ?? null
 }
 
-export async function getMenuItems(category?: string) {
+export async function getMenuItems(category?: string, locale: Locale = 'en') {
   const payload = await getPayloadClient()
   const where: import('payload').Where = {
     available: { equals: true },
@@ -34,17 +36,21 @@ export async function getMenuItems(category?: string) {
     where,
     sort: 'sortOrder',
     limit: 500,
+    locale,
+    fallbackLocale: 'en',
   })
   return result.docs
 }
 
-export async function getMenuCategories() {
+export async function getMenuCategories(locale: Locale = 'en') {
   const payload = await getPayloadClient()
   const result = await payload.find({
     collection: 'menu-categories',
     where: { visible: { equals: true } },
     sort: 'sortOrder',
     limit: 20,
+    locale,
+    fallbackLocale: 'en',
   })
   return result.docs
 }

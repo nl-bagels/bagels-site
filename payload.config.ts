@@ -18,6 +18,14 @@ const dirname = path.dirname(filename);
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "dev-secret-change-in-production",
+  localization: {
+    locales: [
+      { label: 'English', code: 'en' },
+      { label: 'Nederlands', code: 'nl' },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   admin: {
     user: "users",
     importMap: {

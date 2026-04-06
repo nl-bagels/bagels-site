@@ -15,11 +15,13 @@ export const MenuItems: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Item Name',
+      localized: true,
     },
     {
       name: 'description',
       type: 'textarea',
       label: 'Description',
+      localized: true,
     },
     {
       name: 'price',
@@ -47,6 +49,7 @@ export const MenuItems: CollectionConfig = {
       name: 'subcategory',
       type: 'text',
       label: 'Subcategory',
+      localized: true,
       admin: {
         description: 'e.g. Bagel Sandwiches, Iced Drinks',
       },
@@ -92,6 +95,7 @@ export const MenuItems: CollectionConfig = {
       name: 'notes',
       type: 'text',
       label: 'Notes',
+      localized: true,
       admin: {
         description: 'e.g. Add scrambled egg +€2',
       },

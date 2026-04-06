@@ -67,10 +67,11 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
           {/* Language switcher */}
           <button
             onClick={switchLocale}
-            className="text-base text-black font-['Inter',sans-serif] transition-colors hover:text-[#3a7d44] border border-black/20 px-3 py-1 rounded-sm"
+            className="flex items-center gap-1.5 text-base text-black font-['Inter',sans-serif] transition-colors hover:text-[#3a7d44] border border-black/20 px-3 py-1 rounded-sm cursor-pointer"
             aria-label={`Switch to ${locale === 'en' ? 'Dutch' : 'English'}`}
           >
-            {t('switchLang')}
+            <span>{locale === 'en' ? '🇳🇱' : '🇬🇧'}</span>
+            <span>{t('switchLang')}</span>
           </button>
 
           <a
@@ -123,9 +124,10 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
             {/* Mobile language switcher */}
             <button
               onClick={() => { switchLocale(); setMobileOpen(false) }}
-              className="text-left text-lg text-black hover:text-[#3a7d44] transition-colors font-['Inter',sans-serif]"
+              className="flex items-center gap-2 text-left text-lg text-black hover:text-[#3a7d44] transition-colors font-['Inter',sans-serif] cursor-pointer"
             >
-              {t('switchLang')} — {locale === 'en' ? 'Nederlands' : 'English'}
+              <span>{locale === 'en' ? '🇳🇱' : '🇬🇧'}</span>
+              <span>{t('switchLang')} — {locale === 'en' ? 'Nederlands' : 'English'}</span>
             </button>
             <a
               href={reservationUrl}

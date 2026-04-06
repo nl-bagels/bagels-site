@@ -28,11 +28,13 @@ export const MenuCategories: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Display Name',
+      localized: true,
     },
     {
       name: 'description',
       type: 'text',
       label: 'Short Description',
+      localized: true,
       admin: {
         description: 'Shown below the category title on the menu page',
       },

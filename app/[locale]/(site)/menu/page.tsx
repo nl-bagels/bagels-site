@@ -45,10 +45,12 @@ export default async function MenuPage({ params, searchParams }: Props) {
   let categories = FALLBACK_CATEGORIES
   let allItems: Awaited<ReturnType<typeof getMenuItems>> = []
 
+  const payloadLocale = (locale === 'nl' ? 'nl' : 'en') as 'en' | 'nl'
+
   try {
     const [rawCategories, items] = await Promise.all([
-      getMenuCategories(),
-      getMenuItems(),
+      getMenuCategories(payloadLocale),
+      getMenuItems(undefined, payloadLocale),
       getSiteSettings(),
     ])
     if (rawCategories.length > 0) {

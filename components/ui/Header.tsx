@@ -6,11 +6,24 @@ import { useTranslations } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useLocale } from 'next-intl'
 
-interface HeaderProps {
-  reservationUrl?: string
+interface NavLink {
+  label: string
+  href: string
 }
 
-export default function Header({ reservationUrl = '#' }: HeaderProps) {
+interface NavData {
+  navLinks?: NavLink[]
+  reserveLabel?: string
+  openMenuLabel?: string
+  closeMenuLabel?: string
+}
+
+interface HeaderProps {
+  reservationUrl?: string
+  navData?: NavData | null
+}
+
+export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
   const t = useTranslations('nav')
   const locale = useLocale()
   const router = useRouter()
@@ -19,13 +32,19 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const navLinks = [
-    { label: t('menu'), href: '/menu' as const },
-    { label: t('about'), href: '/#about' as const },
-    { label: t('catering'), href: '/#catering' as const },
-    { label: t('jobs'), href: '/#jobs' as const },
-    { label: t('contact'), href: '/#contact' as const },
-  ]
+  const navLinks: NavLink[] = navData?.navLinks && navData.navLinks.length > 0
+    ? navData.navLinks
+    : [
+        { label: t('menu'), href: '/menu' },
+        { label: t('about'), href: '/#about' },
+        { label: t('catering'), href: '/#catering' },
+        { label: t('jobs'), href: '/#jobs' },
+        { label: t('contact'), href: '/#contact' },
+      ]
+
+  const reserveLabel = navData?.reserveLabel ?? t('reserve')
+  const openMenuLabel = navData?.openMenuLabel ?? t('openMenu')
+  const closeMenuLabel = navData?.closeMenuLabel ?? t('closeMenu')
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
@@ -80,7 +99,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
             rel="noopener noreferrer"
             className="bg-[#3a7d44] text-white px-6 py-2.5 text-base font-['Inter',sans-serif] hover:bg-[#2d6235] transition-colors"
           >
-            {t('reserve')}
+            {reserveLabel}
           </a>
         </nav>
 
@@ -88,7 +107,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
         <button
           className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen(true)}
-          aria-label={t('openMenu')}
+          aria-label={openMenuLabel}
         >
           <span className="block w-6 h-0.5 bg-black" />
           <span className="block w-6 h-0.5 bg-black" />
@@ -107,7 +126,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
             <button
               className="self-end text-2xl leading-none"
               onClick={() => setMobileOpen(false)}
-              aria-label={t('closeMenu')}
+              aria-label={closeMenuLabel}
             >
               ×
             </button>
@@ -135,7 +154,7 @@ export default function Header({ reservationUrl = '#' }: HeaderProps) {
               rel="noopener noreferrer"
               className="mt-auto bg-[#3a7d44] text-white px-6 py-3 text-base text-center font-['Inter',sans-serif]"
             >
-              {t('reserve')}
+              {reserveLabel}
             </a>
           </div>
         </div>

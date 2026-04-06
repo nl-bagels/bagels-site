@@ -1,12 +1,27 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 
+interface BottomLink {
+  label: string
+  href: string
+}
+
+interface FooterData {
+  tagline?: string
+  since?: string
+  contactLabel?: string
+  followUsLabel?: string
+  copyrightText?: string
+  bottomLinks?: BottomLink[]
+}
+
 interface FooterProps {
   address?: string
   phone?: string
   email?: string
   instagramUrl?: string
   facebookUrl?: string
+  footerData?: FooterData | null
 }
 
 export default async function Footer({
@@ -15,9 +30,24 @@ export default async function Footer({
   email = 'hello@netherlandsbagels.com',
   instagramUrl = '#',
   facebookUrl = '#',
+  footerData,
 }: FooterProps) {
   const t = await getTranslations('footer')
   const currentYear = new Date().getFullYear()
+
+  const tagline = footerData?.tagline ?? t('tagline')
+  const since = footerData?.since ?? t('since')
+  const contactLabel = footerData?.contactLabel ?? t('contact')
+  const followUsLabel = footerData?.followUsLabel ?? t('followUs')
+  const copyrightText = footerData?.copyrightText
+    ? footerData.copyrightText.replace('{year}', String(currentYear))
+    : t('copyright', { year: currentYear })
+  const bottomLinks: BottomLink[] = footerData?.bottomLinks && footerData.bottomLinks.length > 0
+    ? footerData.bottomLinks
+    : [
+        { label: t('terms'), href: '/terms' },
+        { label: t('privacy'), href: '/privacy' },
+      ]
 
   return (
     <footer className="bg-black text-white">
@@ -28,13 +58,13 @@ export default async function Footer({
             <div className="w-16 h-16 bg-[#3a7d44] rounded-full flex items-center justify-center mb-5">
               <span className="text-white font-bold text-sm">NB</span>
             </div>
-            <p className="text-[#99a1af] text-base leading-6">{t('tagline')}</p>
-            <p className="text-[#99a1af] text-base leading-6">{t('since')}</p>
+            <p className="text-[#99a1af] text-base leading-6">{tagline}</p>
+            <p className="text-[#99a1af] text-base leading-6">{since}</p>
           </div>
 
           {/* Contact */}
           <div className="lg:w-[384px] shrink-0 lg:ml-8">
-            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{t('contact')}</h4>
+            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{contactLabel}</h4>
             <div className="flex flex-col gap-2">
               {address.split(',').map((line, i) => (
                 <p key={i} className="text-[#99a1af] text-base">{line.trim()}</p>
@@ -46,7 +76,7 @@ export default async function Footer({
 
           {/* Follow */}
           <div className="lg:w-[384px] shrink-0 lg:ml-8">
-            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{t('followUs')}</h4>
+            <h4 className="font-['Inter',sans-serif] font-medium text-base text-white mb-4">{followUsLabel}</h4>
             <div className="flex gap-4">
               <a
                 href={instagramUrl}
@@ -76,14 +106,13 @@ export default async function Footer({
 
         {/* Bottom bar */}
         <div className="border-t border-[#1e2939] py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[#99a1af] text-sm">{t('copyright', { year: currentYear })}</p>
+          <p className="text-[#99a1af] text-sm">{copyrightText}</p>
           <div className="flex gap-6">
-            <Link href="/terms" className="text-[#99a1af] text-sm hover:text-white transition-colors">
-              {t('terms')}
-            </Link>
-            <Link href="/privacy" className="text-[#99a1af] text-sm hover:text-white transition-colors">
-              {t('privacy')}
-            </Link>
+            {bottomLinks.map((link) => (
+              <Link key={link.href} href={link.href as any} className="text-[#99a1af] text-sm hover:text-white transition-colors">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

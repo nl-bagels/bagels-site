@@ -5,7 +5,7 @@ import Header from '@/components/ui/Header'
 import Footer from '@/components/ui/Footer'
 import AnnouncementBar from '@/components/ui/AnnouncementBar'
 import StructuredData from '@/components/ui/StructuredData'
-import { getSiteSettings } from '@/lib/payload'
+import { getSiteSettings, getNavigation, getFooterContent } from '@/lib/payload'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -57,10 +57,17 @@ export default async function SiteLayout({
   }
 
   const messages = await getMessages()
+  const payloadLocale = (locale === 'nl' ? 'nl' : 'en') as 'en' | 'nl'
 
   let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
+  let navData: Awaited<ReturnType<typeof getNavigation>> | null = null
+  let footerData: Awaited<ReturnType<typeof getFooterContent>> | null = null
   try {
-    settings = await getSiteSettings()
+    ;[settings, navData, footerData] = await Promise.all([
+      getSiteSettings(payloadLocale),
+      getNavigation(payloadLocale),
+      getFooterContent(payloadLocale),
+    ])
   } catch {
     // DB not available during build/dev without env
   }
@@ -78,7 +85,10 @@ export default async function SiteLayout({
               linkUrl={announcement.linkUrl ?? undefined}
             />
           )}
-          <Header reservationUrl={settings?.reservationUrl ?? '#'} />
+          <Header
+            reservationUrl={settings?.reservationUrl ?? '#'}
+            navData={navData}
+          />
           <StructuredData />
           <main>{children}</main>
           <Footer
@@ -87,6 +97,7 @@ export default async function SiteLayout({
             email={settings?.contactEmail ?? undefined}
             instagramUrl={settings?.instagramUrl ?? undefined}
             facebookUrl={settings?.facebookUrl ?? undefined}
+            footerData={footerData}
           />
         </NextIntlClientProvider>
       </body>

@@ -2,6 +2,7 @@ import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
+import { mcpPlugin } from "@payloadcms/plugin-mcp";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -52,6 +53,19 @@ export default buildConfig({
     },
   }),
   plugins: [
+    mcpPlugin({
+      collections: {
+        'hero-blocks': { enabled: true },
+        'menu-items': { enabled: true },
+        'menu-categories': { enabled: true },
+        jobs: { enabled: true },
+        media: { enabled: true },
+        users: { enabled: false },
+      },
+      globals: {
+        'site-settings': { enabled: true },
+      },
+    }),
     ...(process.env.BLOB_READ_WRITE_TOKEN
       ? [
           vercelBlobStorage({

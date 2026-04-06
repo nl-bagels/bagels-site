@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Outfit } from 'next/font/google'
 import '../globals.css'
 import Header from '@/components/ui/Header'
 import Footer from '@/components/ui/Footer'
@@ -13,11 +13,11 @@ const inter = Inter({
   display: 'swap',
 })
 
-const playfair = Playfair_Display({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-outfit',
   display: 'swap',
-  weight: ['600'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -48,7 +48,7 @@ export default async function SiteLayout({
   const announcement = settings?.announcementBar
 
   return (
-    <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="nl" className={`${inter.variable} ${outfit.variable}`}>
       <body>
         {announcement?.enabled && announcement.text && (
           <AnnouncementBar

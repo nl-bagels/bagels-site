@@ -16,7 +16,7 @@ export default function Location({
   return (
     <section id="contact" className="bg-[#f5f5f5] py-20 lg:py-24">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
-        <h2 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black text-center mb-12">
+        <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black text-center mb-12">
           Visit Us
         </h2>
 
@@ -40,7 +40,7 @@ export default function Location({
           <div className="flex flex-col gap-8 flex-1">
             {/* Address */}
             <div>
-              <h3 className="font-['Playfair_Display',serif] font-semibold text-2xl text-black mb-4">
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
                 Address
               </h3>
               <div className="flex flex-col gap-1">
@@ -54,7 +54,7 @@ export default function Location({
 
             {/* Hours */}
             <div>
-              <h3 className="font-['Playfair_Display',serif] font-semibold text-2xl text-black mb-4">
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
                 Hours
               </h3>
               <div className="flex flex-col gap-2 max-w-sm">
@@ -73,7 +73,7 @@ export default function Location({
 
             {/* Contact */}
             <div>
-              <h3 className="font-['Playfair_Display',serif] font-semibold text-2xl text-black mb-4">
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-4">
                 Contact
               </h3>
               <div className="flex flex-col gap-2">

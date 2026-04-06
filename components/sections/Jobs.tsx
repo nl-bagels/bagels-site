@@ -16,7 +16,7 @@ export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagel
     <section id="jobs" className="bg-white py-20 lg:py-24">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         <div className="text-center max-w-[832px] mx-auto">
-          <h2 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-6">
+          <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-6">
             Join Our Team
           </h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px] leading-[30.6px] mb-10">
@@ -28,7 +28,7 @@ export default function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagel
             <div className="flex flex-col gap-4 mb-10 text-left">
               {jobs.map((job) => (
                 <div key={job.id} className="border border-stone-200 p-6">
-                  <h3 className="font-['Playfair_Display',serif] font-semibold text-xl text-black mb-2">
+                  <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-2">
                     {job.title}
                   </h3>
                   {job.description && (

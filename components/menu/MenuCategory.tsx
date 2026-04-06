@@ -34,7 +34,7 @@ export default function MenuCategory({ slug, label, description, items }: MenuCa
 
   return (
     <section id={`category-${slug}`} className="py-12 lg:py-16">
-      <h2 className="font-['Playfair_Display',serif] font-semibold text-3xl lg:text-[40px] text-black mb-2">
+      <h2 className="font-['Outfit',sans-serif] font-semibold text-3xl lg:text-[40px] text-black mb-2">
         {label}
       </h2>
       {description && (

@@ -56,7 +56,7 @@ export default function Hero({
       <div className="relative z-10 h-full flex items-center justify-center px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h1
-            className={`font-['Playfair_Display',serif] font-semibold text-4xl sm:text-5xl md:text-[72px] leading-[1.2] md:leading-[86.4px] mb-6 ${textClass}`}
+            className={`font-['Outfit',sans-serif] font-semibold text-4xl sm:text-5xl md:text-[72px] leading-[1.2] md:leading-[86.4px] mb-6 ${textClass}`}
           >
             {title}
           </h1>

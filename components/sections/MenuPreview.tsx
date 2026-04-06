@@ -34,7 +34,7 @@ export default function MenuPreview() {
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
+          <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
             Our Menu
           </h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px]">
@@ -69,7 +69,7 @@ export default function MenuPreview() {
 
               {/* Info */}
               <div className="p-6">
-                <h3 className="font-['Playfair_Display',serif] font-semibold text-2xl text-black mb-2">
+                <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-2">
                   {cat.label}
                 </h3>
                 <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-6">

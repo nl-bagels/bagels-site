@@ -31,7 +31,7 @@ export default function Catering({ contactEmail = 'hello@netherlandsbagels.com' 
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
+          <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
             Catering
           </h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px] max-w-[672px] mx-auto leading-7">
@@ -43,7 +43,7 @@ export default function Catering({ contactEmail = 'hello@netherlandsbagels.com' 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {packages.map((pkg) => (
             <div key={pkg.name} className="bg-[#f5f5f5] p-8">
-              <h3 className="font-['Playfair_Display',serif] font-semibold text-[28px] leading-[42px] text-black mb-2">
+              <h3 className="font-['Outfit',sans-serif] font-semibold text-[28px] leading-[42px] text-black mb-2">
                 {pkg.name}
               </h3>
               <p className="font-['Inter',sans-serif] text-[#4a5565] text-base mb-6">

@@ -66,7 +66,7 @@ export default async function MenuPage({ searchParams }: Props) {
       {/* Page hero */}
       <div className="bg-[#f5f5f5] py-16 text-center">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
-          <h1 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[56px] leading-tight text-black">
+          <h1 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[56px] leading-tight text-black">
             Our Menu
           </h1>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-lg mt-4">
@@ -120,7 +120,7 @@ export default async function MenuPage({ searchParams }: Props) {
       <div className="bg-[#f5f5f5] py-12 mt-8">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <div className="max-w-2xl">
-            <h3 className="font-['Playfair_Display',serif] font-semibold text-xl text-black mb-3">
+            <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-3">
               Allergies & Info
             </h3>
             <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-relaxed">

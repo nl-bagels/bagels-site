@@ -11,7 +11,7 @@ export default function About({ imageUrl }: AboutProps) {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Text */}
           <div className="flex-1 max-w-[584px]">
-            <h2 className="font-['Playfair_Display',serif] font-semibold text-4xl lg:text-[48px] leading-[1.2] lg:leading-[57.6px] text-black mb-9">
+            <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[1.2] lg:leading-[57.6px] text-black mb-9">
               No-Nonsense<br />New York Bagels
             </h2>
             <div className="flex flex-col gap-4">

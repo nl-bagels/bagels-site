@@ -58,9 +58,9 @@ export default async function MenuPage({ params, searchParams }: Props) {
     ])
     if (rawCategories.length > 0) {
       categories = rawCategories.map((c) => ({
-        slug: c.slug,
+        slug: c.slug as string,
         label: c.label,
-        description: c.description ?? null,
+        description: c.description ?? '',
         sortOrder: c.sortOrder ?? 0,
         visible: c.visible ?? true,
       }))

@@ -1,27 +1,13 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 
-interface BottomLink {
-  label: string
-  href: string
-}
-
-interface FooterData {
-  tagline?: string
-  since?: string
-  contactLabel?: string
-  followUsLabel?: string
-  copyrightText?: string
-  bottomLinks?: BottomLink[]
-}
-
 interface FooterProps {
   address?: string
   phone?: string
   email?: string
   instagramUrl?: string
   facebookUrl?: string
-  footerData?: FooterData | null
+  footerData?: any
 }
 
 export default async function Footer({
@@ -42,7 +28,7 @@ export default async function Footer({
   const copyrightText = footerData?.copyrightText
     ? footerData.copyrightText.replace('{year}', String(currentYear))
     : t('copyright', { year: currentYear })
-  const bottomLinks: BottomLink[] = footerData?.bottomLinks && footerData.bottomLinks.length > 0
+  const bottomLinks: { label: string; href: string }[] = footerData?.bottomLinks && footerData.bottomLinks.length > 0
     ? footerData.bottomLinks
     : [
         { label: t('terms'), href: '/terms' },

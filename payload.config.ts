@@ -52,7 +52,6 @@ export default buildConfig({
   ],
   globals: [SiteSettings, Navigation, FooterContent],
   db: postgresAdapter({
-    push: true,
     pool: {
       connectionString:
         process.env.DATABASE_URL_UNPOOLED ||

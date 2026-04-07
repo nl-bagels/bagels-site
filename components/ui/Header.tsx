@@ -6,21 +6,9 @@ import { useTranslations } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useLocale } from 'next-intl'
 
-interface NavLink {
-  label: string
-  href: string
-}
-
-interface NavData {
-  navLinks?: NavLink[]
-  reserveLabel?: string
-  openMenuLabel?: string
-  closeMenuLabel?: string
-}
-
 interface HeaderProps {
   reservationUrl?: string
-  navData?: NavData | null
+  navData?: any
 }
 
 export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
@@ -32,7 +20,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const navLinks: NavLink[] = navData?.navLinks && navData.navLinks.length > 0
+  const navLinks: { label: string; href: string }[] = navData?.navLinks && navData.navLinks.length > 0
     ? navData.navLinks
     : [
         { label: t('menu'), href: '/menu' },

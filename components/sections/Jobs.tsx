@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 
 interface Job {
@@ -64,16 +65,17 @@ export default async function Jobs({ jobs = [], contactEmail = 'hello@netherland
             </div>
           )}
 
-          {/* Team photo strip — placeholder */}
-          <div className="grid grid-cols-3 gap-6">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="rounded-[20px] overflow-hidden bg-[#7d3f1e] h-[200px] lg:h-[333px] flex items-center justify-center"
-              >
-                <span className="text-[#eee6d9]/20 text-6xl">🥯</span>
-              </div>
-            ))}
+          {/* Team photo strip */}
+          <div className="flex gap-6">
+            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[286px] relative">
+              <Image src="/images/jobs-1.png" alt="" fill className="object-cover" sizes="286px" />
+            </div>
+            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[285px] relative">
+              <Image src="/images/jobs-2.png" alt="" fill className="object-cover" sizes="285px" />
+            </div>
+            <div className="rounded-[20px] overflow-hidden flex-1 h-[333px] relative">
+              <Image src="/images/menu-highlight-2.png" alt="" fill className="object-cover" sizes="(max-width: 1672px) 50vw" />
+            </div>
           </div>
         </div>
       </div>

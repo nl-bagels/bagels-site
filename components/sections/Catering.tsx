@@ -16,9 +16,9 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
   }))
 
   return (
-    <section id="catering" className="bg-[#eee6d9] py-6 px-4 sm:px-6 lg:px-6">
-      {/* Dark rounded card */}
-      <div className="bg-[#1e170e] rounded-[40px] py-[120px] px-4 sm:px-12 lg:px-[228px] flex flex-col gap-12 items-center max-w-[1672px] mx-auto">
+    <section id="catering" className="bg-[#eee6d9] px-6">
+      {/* Dark rounded card — 24px margin on each side */}
+      <div className="bg-[#1e170e] rounded-[40px] py-[120px] px-4 sm:px-12 lg:px-[228px] flex flex-col gap-12 items-center">
         {/* Header */}
         <div className="flex flex-col gap-4 items-center text-center text-[#eee6d9] max-w-[672px]">
           <h2

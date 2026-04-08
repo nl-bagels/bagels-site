@@ -31,7 +31,7 @@ export default async function MenuHighlight() {
 
         {/* Single image with badge */}
         <div className="relative w-full" style={{ height: '340px' }}>
-          <div className="rounded-[24px] overflow-hidden w-full h-full">
+          <div className="relative rounded-[24px] overflow-hidden w-full h-full">
             <Image
               src="/images/menu-highlight-1.png"
               alt=""

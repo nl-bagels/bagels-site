@@ -66,15 +66,15 @@ export default async function Jobs({ jobs = [], contactEmail = 'hello@netherland
           )}
 
           {/* Team photo strip */}
-          <div className="flex gap-6">
-            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[286px] relative">
+          <div className="flex gap-6 overflow-x-auto pb-2 lg:overflow-x-visible lg:pb-0">
+            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[260px] lg:w-[286px] relative">
               <Image src="/images/jobs-1.png" alt="" fill className="object-cover" sizes="286px" />
             </div>
-            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[285px] relative">
+            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[260px] lg:w-[285px] relative">
               <Image src="/images/jobs-2.png" alt="" fill className="object-cover" sizes="285px" />
             </div>
-            <div className="rounded-[20px] overflow-hidden flex-1 h-[333px] relative">
-              <Image src="/images/menu-highlight-2.png" alt="" fill className="object-cover" sizes="(max-width: 1672px) 50vw" />
+            <div className="rounded-[20px] overflow-hidden shrink-0 h-[333px] w-[260px] lg:w-auto lg:flex-1 relative">
+              <Image src="/images/menu-highlight-2.png" alt="" fill className="object-cover" sizes="(max-width: 1024px) 260px, 50vw" />
             </div>
           </div>
         </div>

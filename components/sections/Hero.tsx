@@ -23,7 +23,10 @@ export default function Hero({
   return (
     <section className="relative w-full pt-12 pb-12 bg-[#eee6d9]">
       {/* Dark rounded card */}
-      <div className="mx-4 sm:mx-6 lg:mx-6 rounded-[40px] overflow-hidden relative bg-[#1e170e]" style={{ minHeight: '640px' }}>
+      <div
+        className="mx-4 sm:mx-6 lg:mx-6 rounded-[40px] overflow-hidden relative bg-[#1e170e]"
+        style={{ minHeight: 'clamp(600px, 55vw, 1045px)' }}
+      >
 
         {/* Background media */}
         {backgroundVideo ? (
@@ -39,24 +42,14 @@ export default function Hero({
             src={bgSrc}
             alt="Hero background"
             fill
-            className="object-cover opacity-70"
+            className="object-cover opacity-70 object-bottom"
             priority
             sizes="100vw"
           />
         )}
 
-        {/* "NEW YORK STYLE" SVG text overlay at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-          <img
-            src="/images/hero-text.svg"
-            alt=""
-            className="w-full"
-            style={{ opacity: 0.35, display: 'block' }}
-          />
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-start text-center px-4 pt-[76px] pb-24 min-h-[640px]">
+        <div className="relative z-10 flex flex-col items-center justify-start text-center px-4 pt-[76px] pb-24 min-h-[inherit]">
           <div className="max-w-[638px] mx-auto flex flex-col items-center gap-6">
             <div className="flex flex-col items-center">
               <h1

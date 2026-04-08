@@ -60,16 +60,23 @@ export default async function MenuHighlight() {
             </div>
             {/* Badge / seal */}
             <div
-              className="absolute z-10 bg-[#9b5026] rounded-full flex items-center justify-center"
+              className="absolute z-10"
               style={{
-                width: '109px',
-                height: '109px',
+                width: '140px',
+                height: '140px',
                 left: '50%',
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              <span className="text-[#eee6d9] text-2xl">🔥</span>
+              <img
+                src="/images/new-menu-badge.svg"
+                alt="New Menu"
+                width={140}
+                height={140}
+                className="w-full h-full animate-spin"
+                style={{ animationDuration: '12s', animationTimingFunction: 'linear' }}
+              />
             </div>
           </div>
 

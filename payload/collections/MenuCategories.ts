@@ -46,6 +46,15 @@ export const MenuCategories: CollectionConfig = {
       defaultValue: 0,
     },
     {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Category Image',
+      admin: {
+        description: 'Shown on the homepage menu preview cards',
+      },
+    },
+    {
       name: 'visible',
       type: 'checkbox',
       label: 'Visible',

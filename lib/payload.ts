@@ -49,6 +49,7 @@ export async function getMenuCategories(locale: Locale = 'en') {
     where: { visible: { equals: true } },
     sort: 'sortOrder',
     limit: 20,
+    depth: 1,
     locale,
     fallbackLocale: 'en',
   })

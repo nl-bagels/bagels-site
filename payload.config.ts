@@ -58,6 +58,7 @@ export default buildConfig({
         process.env.DATABASE_URL ||
         "postgresql://localhost:5432/netherlands_bagels",
     },
+    push: process.env.NODE_ENV === 'development',
   }),
   plugins: [
     mcpPlugin({

@@ -1,18 +1,43 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
+import { getMenuCategories } from '@/lib/payload'
 
-const categorySlugs = ['savory', 'sweet', 'loose_bagels', 'drinks'] as const
+const FALLBACK_IMAGES: Record<string, string> = {
+  savory: '/images/menu-savory.jpg',
+  sweet: '/images/menu-sweet.jpg',
+  loose_bagels: '/images/menu-loose.jpg',
+  drinks: '/images/menu-drinks.jpg',
+}
 
 export default async function MenuPreview() {
   const t = await getTranslations('menuPreview')
 
-  const categories = categorySlugs.map((slug) => ({
-    slug,
-    label: t(`categories.${slug}.label`),
-    description: t(`categories.${slug}.description`),
-    imageUrl: null as string | null,
-  }))
+  let cmsCategories: { slug: string; label: string; description: string; imageUrl: string | null }[] = []
+  try {
+    const raw = await getMenuCategories('en')
+    cmsCategories = raw
+      .filter((c) => ['savory', 'sweet', 'loose_bagels', 'drinks'].includes(c.slug as string))
+      .map((c) => ({
+        slug: c.slug as string,
+        label: c.label,
+        description: c.description ?? '',
+        imageUrl:
+          c.image && typeof c.image === 'object' && 'url' in c.image
+            ? (c.image.url as string)
+            : (FALLBACK_IMAGES[c.slug as string] ?? null),
+      }))
+  } catch {}
+
+  const categories =
+    cmsCategories.length > 0
+      ? cmsCategories
+      : (['savory', 'sweet', 'loose_bagels', 'drinks'] as const).map((slug) => ({
+          slug,
+          label: t(`categories.${slug}.label`),
+          description: t(`categories.${slug}.description`),
+          imageUrl: FALLBACK_IMAGES[slug],
+        }))
 
   return (
     <section id="menu" className="bg-[#eee6d9] py-[120px]">

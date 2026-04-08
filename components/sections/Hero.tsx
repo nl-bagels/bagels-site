@@ -17,64 +17,72 @@ export default function Hero({
   ctaUrl,
   backgroundImageUrl,
   backgroundVideo,
-  textColor = 'light',
 }: HeroProps) {
-  const textClass = textColor === 'light' ? 'text-white' : 'text-black'
+  const bgSrc = backgroundImageUrl ?? '/images/hero-bg.png'
 
   return (
-    <section className="relative w-full h-[55vh] md:h-screen min-h-[480px] max-h-[997px] overflow-hidden">
-      {/* Background */}
-      {backgroundVideo ? (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={backgroundImageUrl}
-        >
-          <source src={backgroundVideo} />
-        </video>
-      ) : backgroundImageUrl ? (
-        <Image
-          src={backgroundImageUrl}
-          alt="Hero background"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-      ) : (
-        <div className="absolute inset-0 bg-stone-800" />
-      )}
+    <section className="relative w-full pt-12 pb-12 bg-[#eee6d9]">
+      {/* Dark rounded card */}
+      <div className="mx-4 sm:mx-6 lg:mx-6 rounded-[40px] overflow-hidden relative bg-[#1e170e]" style={{ minHeight: '640px' }}>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/45" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1
-            className={`font-['Outfit',sans-serif] font-semibold text-4xl sm:text-5xl md:text-[72px] leading-[1.2] md:leading-[86.4px] mb-6 ${textClass}`}
+        {/* Background media */}
+        {backgroundVideo ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            autoPlay muted loop playsInline
+            poster={bgSrc}
           >
-            {title}
-          </h1>
-          {subtitle && (
-            <p
-              className={`font-['Inter',sans-serif] text-lg md:text-2xl leading-8 mb-8 ${textClass}`}
-            >
-              {subtitle}
-            </p>
-          )}
-          {ctaLabel && ctaUrl && (
-            <a
-              href={ctaUrl}
-              className="inline-block bg-[#3a7d44] text-white px-10 py-4 text-base md:text-lg font-['Inter',sans-serif] hover:bg-[#2d6235] transition-colors"
-            >
-              {ctaLabel}
-            </a>
-          )}
+            <source src={backgroundVideo} />
+          </video>
+        ) : (
+          <Image
+            src={bgSrc}
+            alt="Hero background"
+            fill
+            className="object-cover opacity-70"
+            priority
+            sizes="100vw"
+          />
+        )}
+
+        {/* "NEW YORK STYLE" SVG text overlay at the bottom */}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+          <img
+            src="/images/hero-text.svg"
+            alt=""
+            className="w-full"
+            style={{ opacity: 0.35, display: 'block' }}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-start text-center px-4 pt-[76px] pb-24 min-h-[640px]">
+          <div className="max-w-[638px] mx-auto flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center">
+              <h1
+                className="font-['Anton',sans-serif] text-[#eee6d9] uppercase tracking-[2px] leading-none"
+                style={{ fontSize: 'clamp(40px, 5.5vw, 72px)' }}
+              >
+                {title}
+              </h1>
+              {subtitle && (
+                <p
+                  className="font-['Inria_Sans',sans-serif] text-[#eee6d9] mt-2"
+                  style={{ fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: '32px' }}
+                >
+                  {subtitle}
+                </p>
+              )}
+            </div>
+            {ctaLabel && ctaUrl && (
+              <a
+                href={ctaUrl}
+                className="inline-flex items-center justify-center bg-white text-[#1e170e] px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#eee6d9] transition-colors"
+              >
+                {ctaLabel}
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </section>

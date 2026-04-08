@@ -8,8 +8,17 @@
   --color-footer-border: #1e2939;
   --color-light-bg: #f5f5f5;
 
+  /* Figma design tokens */
+  --color-vanilla: #eee6d9;
+  --color-dark: #1e170e;
+  --color-accent-brown: #9b5026;
+  --color-accent-coffee: #b39978;
+  --color-sec-txt: #484037;
+
   --font-display: "Outfit", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-anton: "Anton", system-ui, sans-serif;
+  --font-inria: "Inria Sans", system-ui, sans-serif;
 }
 
 @layer base {
@@ -24,8 +33,8 @@
 
   body {
     font-family: var(--font-sans);
-    color: #000;
-    background: #fff;
+    color: #1e170e;
+    background: #eee6d9;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -43,4 +52,14 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+    will-change: transform;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

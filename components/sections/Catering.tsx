@@ -16,49 +16,69 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
   }))
 
   return (
-    <section id="catering" className="bg-white py-20 lg:py-24">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+    <section id="catering" className="bg-[#eee6d9] py-6 px-4 sm:px-6 lg:px-6">
+      {/* Dark rounded card */}
+      <div className="bg-[#1e170e] rounded-[40px] py-[120px] px-4 sm:px-12 lg:px-[228px] flex flex-col gap-12 items-center max-w-[1672px] mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
+        <div className="flex flex-col gap-4 items-center text-center text-[#eee6d9] max-w-[672px]">
+          <h2
+            className="font-['Anton',sans-serif] uppercase"
+            style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
+          >
             {t('heading')}
           </h2>
-          <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px] max-w-[672px] mx-auto leading-7">
+          <p className="font-['Inter',sans-serif] font-normal text-[20px] leading-[28px]">
             {t('subtitle')}
           </p>
         </div>
 
         {/* Packages */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           {packages.map((pkg) => (
-            <div key={pkg.name} className="bg-[#f5f5f5] p-8">
-              <h3 className="font-['Outfit',sans-serif] font-semibold text-[28px] leading-[42px] text-black mb-2">
-                {pkg.name}
-              </h3>
-              <p className="font-['Inter',sans-serif] text-[#4a5565] text-base mb-6">
-                {pkg.subtitle}
-              </p>
-              <ul className="flex flex-col gap-2">
+            <div key={pkg.name} className="bg-white rounded-[24px] flex flex-col overflow-hidden">
+              {/* Name & subtitle */}
+              <div className="p-8 pb-4">
+                <h3 className="font-['Anton',sans-serif] text-[28px] leading-[40px] text-[#1e170e]">
+                  {pkg.name}
+                </h3>
+                <p className="font-['Inter',sans-serif] text-[#484037] text-[16px] leading-[20px] mt-1">
+                  {pkg.subtitle}
+                </p>
+              </div>
+              {/* Items */}
+              <div className="flex flex-col gap-2 p-8 pt-4 flex-1">
                 {pkg.items.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="text-[#3a7d44] font-['Inter',sans-serif] text-base leading-6 shrink-0">✓</span>
-                    <span className="font-['Inter',sans-serif] text-base text-black leading-6">{item}</span>
-                  </li>
+                  <div key={item} className="flex items-center gap-3">
+                    {/* Checkmark */}
+                    <svg
+                      className="w-6 h-6 shrink-0 text-[#9b5026]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span className="font-['Inter',sans-serif] text-[16px] text-[#1e170e] leading-[24px]">
+                      {item}
+                    </span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="flex justify-center mt-12">
-          <a
-            href={`mailto:${contactEmail}?subject=Catering Inquiry`}
-            className="bg-[#3a7d44] text-white px-10 py-4 text-base font-['Inter',sans-serif] hover:bg-[#2d6235] transition-colors"
-          >
-            {t('cta')}
-          </a>
-        </div>
+        <a
+          href={`mailto:${contactEmail}?subject=Catering Inquiry`}
+          className="inline-flex items-center justify-center bg-white text-[#1e170e] px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#eee6d9] transition-colors"
+        >
+          {t('cta')}
+        </a>
       </div>
     </section>
   )

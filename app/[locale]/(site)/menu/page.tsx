@@ -86,12 +86,12 @@ export default async function MenuPage({ params, searchParams }: Props) {
   return (
     <>
       {/* Page hero — CMS-driven or fallback */}
-      <div className={`${headerBlock?.background === 'white' ? 'bg-white' : 'bg-[#f5f5f5]'} py-16 text-center`}>
+      <div className="bg-[#eee6d9] py-16 text-center">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
-          <h1 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[56px] leading-tight text-black">
+          <h1 className="font-['Anton',sans-serif] text-4xl lg:text-[56px] leading-tight text-[#1e170e] uppercase">
             {headerBlock?.heading ?? t('heading')}
           </h1>
-          <p className="font-['Inter',sans-serif] text-[#4a5565] text-lg mt-4">
+          <p className="font-['Inter',sans-serif] text-[#484037] text-lg mt-4">
             {headerBlock?.subtitle ?? t('subtitle')}
           </p>
         </div>
@@ -103,7 +103,7 @@ export default async function MenuPage({ params, searchParams }: Props) {
       </Suspense>
 
       {/* Menu content */}
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px] divide-y divide-stone-100">
+      <div className="bg-[#eee6d9] max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px] divide-y divide-[#1e170e]/10">
         {categories.map((cat) => {
           const items = (itemsByCategory[cat.slug] ?? []).map((item) => {
             const imageUrl =
@@ -139,13 +139,13 @@ export default async function MenuPage({ params, searchParams }: Props) {
       </div>
 
       {/* Allergy note — CMS-driven or fallback */}
-      <div className="bg-[#f5f5f5] py-12 mt-8">
+      <div className="bg-[#1e170e] py-12 mt-8">
         <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
           <div className="max-w-2xl">
-            <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-3">
+            <h3 className="font-['Anton',sans-serif] text-xl text-[#eee6d9] mb-3 uppercase">
               {allergiesBlock?.heading ?? t('allergiesHeading')}
             </h3>
-            <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-relaxed">
+            <p className="font-['Inter',sans-serif] text-[#eee6d9]/80 text-base leading-relaxed">
               {allergiesBlock?.body ?? t('allergiesText')}
             </p>
           </div>

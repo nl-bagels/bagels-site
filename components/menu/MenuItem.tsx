@@ -23,17 +23,17 @@ export default async function MenuItem({
   const t = await getTranslations('menuItem')
 
   const tagColors: Record<string, string> = {
-    vegan: 'bg-green-50 text-green-700',
-    new: 'bg-blue-50 text-blue-700',
-    popular: 'bg-amber-50 text-amber-700',
-    seasonal: 'bg-orange-50 text-orange-700',
+    vegan: 'bg-[#1e170e]/10 text-[#1e170e]',
+    new: 'bg-[#9b5026]/10 text-[#9b5026]',
+    popular: 'bg-[#b39978]/20 text-[#484037]',
+    seasonal: 'bg-[#9b5026]/10 text-[#9b5026]',
   }
 
   return (
-    <div className={`flex gap-4 py-5 border-b border-stone-100 ${!available ? 'opacity-50' : ''}`}>
+    <div className={`flex gap-4 py-5 border-b border-[#1e170e]/10 ${!available ? 'opacity-50' : ''}`}>
       {/* Image (optional) */}
       {imageUrl && (
-        <div className="relative w-20 h-20 shrink-0 overflow-hidden bg-stone-100">
+        <div className="relative w-20 h-20 shrink-0 overflow-hidden rounded-[8px] bg-[#1e170e]/10">
           <Image
             src={imageUrl}
             alt={name}
@@ -48,28 +48,28 @@ export default async function MenuItem({
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <span className="font-['Inter',sans-serif] font-medium text-base text-black">
+            <span className="font-['Inter',sans-serif] font-medium text-base text-[#1e170e]">
               {name}
             </span>
             {!available && (
-              <span className="ml-2 text-xs text-stone-400 font-['Inter',sans-serif]">
+              <span className="ml-2 text-xs text-[#484037] font-['Inter',sans-serif]">
                 {t('unavailable')}
               </span>
             )}
           </div>
-          <span className="font-['Inter',sans-serif] font-medium text-base text-black shrink-0">
+          <span className="font-['Inter',sans-serif] font-medium text-base text-[#9b5026] shrink-0">
             €{price.toFixed(2)}
           </span>
         </div>
 
         {description && (
-          <p className="font-['Inter',sans-serif] text-sm text-[#4a5565] mt-1 leading-5">
+          <p className="font-['Inter',sans-serif] text-sm text-[#484037] mt-1 leading-5">
             {description}
           </p>
         )}
 
         {notes && (
-          <p className="font-['Inter',sans-serif] text-xs text-[#4a5565] mt-1 italic">
+          <p className="font-['Inter',sans-serif] text-xs text-[#484037] mt-1 italic">
             {notes}
           </p>
         )}
@@ -80,7 +80,7 @@ export default async function MenuItem({
               <span
                 key={tag}
                 className={`inline-block px-2 py-0.5 text-xs font-['Inter',sans-serif] font-medium rounded-full ${
-                  tagColors[tag] ?? 'bg-stone-100 text-stone-600'
+                  tagColors[tag] ?? 'bg-[#1e170e]/10 text-[#484037]'
                 }`}
               >
                 {t(`tags.${tag}` as Parameters<typeof t>[0]) ?? tag}

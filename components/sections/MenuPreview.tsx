@@ -15,61 +15,65 @@ export default async function MenuPreview() {
   }))
 
   return (
-    <section id="menu" className="bg-[#f5f5f5] py-20 lg:py-24">
+    <section id="menu" className="bg-[#eee6d9] py-[120px]">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
-            {t('heading')}
-          </h2>
-          <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px]">
-            {t('subtitle')}
-          </p>
-        </div>
-
-        {/* Category cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/menu?category=${cat.slug}`}
-              className="bg-white overflow-hidden group hover:shadow-md transition-shadow"
+        <div className="flex flex-col gap-12 items-center">
+          {/* Centered header */}
+          <div className="flex flex-col gap-4 items-center text-center">
+            <h2
+              className="font-['Anton',sans-serif] text-[#1e170e] uppercase"
+              style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
             >
-              {/* Image */}
-              <div className="relative w-full aspect-square overflow-hidden bg-stone-100">
-                {cat.imageUrl ? (
-                  <Image
-                    src={cat.imageUrl}
-                    alt={cat.label}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 50vw, 286px"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-stone-100">
-                    <span className="text-stone-300 text-4xl">🥯</span>
-                  </div>
-                )}
-              </div>
+              {t('heading')}
+            </h2>
+            <p className="font-['Inter',sans-serif] text-[#484037] text-[20px] leading-[28px]">
+              {t('subtitle')}
+            </p>
+          </div>
 
-              {/* Info */}
-              <div className="p-6">
-                <h3 className="font-['Outfit',sans-serif] font-semibold text-2xl text-black mb-2">
-                  {cat.label}
-                </h3>
-                <p className="font-['Inter',sans-serif] text-[#4a5565] text-base leading-6">
-                  {cat.description}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+          {/* 4-card row */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {categories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/menu?category=${cat.slug}`}
+                className="bg-[#1e170e] overflow-hidden rounded-[20px] group hover:scale-[1.02] transition-transform duration-300 flex flex-col"
+                style={{ minHeight: '426px' }}
+              >
+                {/* Image — fixed 286px height */}
+                <div className="relative w-full shrink-0 overflow-hidden" style={{ height: '286px' }}>
+                  {cat.imageUrl ? (
+                    <Image
+                      src={cat.imageUrl}
+                      alt={cat.label}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 50vw, 286px"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-[#2a1e12]">
+                      <span className="text-[#eee6d9]/20 text-6xl">🥯</span>
+                    </div>
+                  )}
+                </div>
 
-        {/* CTA */}
-        <div className="flex justify-center mt-12">
+                {/* Text */}
+                <div className="flex flex-col gap-2 p-6 flex-1">
+                  <h3 className="font-['Anton',sans-serif] text-[24px] text-[#eee6d9] leading-[36px]">
+                    {cat.label}
+                  </h3>
+                  <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[18px] leading-[24px]">
+                    {cat.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Centered CTA */}
           <Link
             href="/menu"
-            className="bg-black text-white px-10 py-4 text-base font-['Inter',sans-serif] hover:bg-stone-800 transition-colors"
+            className="inline-flex items-center justify-center bg-[#9b5026] text-white px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#7d3f1e] transition-colors"
           >
             {t('viewFull')}
           </Link>

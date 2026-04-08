@@ -27,6 +27,11 @@
       "catering": "Catering"
     }
   },
+  "menuHighlight": {
+    "heading": "New Fresh Summer Menu",
+    "subtitle": "Discover our new seasonal menu. Fresh ingredients, bold flavors — handcrafted daily.",
+    "cta": "Taste it"
+  },
   "menuPreview": {
     "heading": "Our Menu",
     "subtitle": "Discover our selection of handcrafted bagels and more",

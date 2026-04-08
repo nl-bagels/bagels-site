@@ -19,7 +19,7 @@ export default function AnnouncementBar({ text, linkText, linkUrl }: Announcemen
   if (!visible) return null
 
   return (
-    <div className="bg-[#3a7d44] text-white text-sm py-2 px-4 flex items-center justify-center gap-3 relative">
+    <div className="bg-[#9b5026] text-[#eee6d9] text-sm py-2 px-4 flex items-center justify-center gap-3 relative font-['Inter',sans-serif]">
       <span>{text}</span>
       {linkText && linkUrl && (
         <a

@@ -27,6 +27,11 @@
       "catering": "Catering"
     }
   },
+  "menuHighlight": {
+    "heading": "Nieuw Vers Zomermenu",
+    "subtitle": "Ontdek ons nieuwe seizoensmenu. Verse ingrediënten, gedurfde smaken — dagelijks met de hand gemaakt.",
+    "cta": "Proef het"
+  },
   "menuPreview": {
     "heading": "Ons Menu",
     "subtitle": "Ontdek ons assortiment handgemaakte bagels en meer",

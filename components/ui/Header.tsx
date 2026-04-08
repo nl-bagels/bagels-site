@@ -47,16 +47,31 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white transition-shadow duration-300 border-b border-black/10 ${
+      className={`sticky top-0 z-50 bg-[#eee6d9] transition-shadow duration-300 border-b border-[#1e170e]/10 ${
         scrolled ? 'shadow-sm' : ''
       }`}
     >
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px] h-20 flex items-center justify-between">
+
         {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0">
-          <div className="w-12 h-12 bg-[#3a7d44] rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-xs text-center leading-tight">NB</span>
-          </div>
+        <Link href="/" className="flex items-center gap-[13px] shrink-0">
+          {/* Bagel icon — 70×52px per Figma */}
+          <Image
+            src="/logo/icon-dark.png"
+            alt=""
+            width={70}
+            height={52}
+            className="object-contain shrink-0"
+            priority
+          />
+          {/* Wordmark — 137×43px per Figma */}
+          <img
+            src="/logo/wordmark.svg"
+            alt="Netherlands Bagels"
+            width={137}
+            height={43}
+            className="shrink-0"
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -65,7 +80,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-base text-black font-['Inter',sans-serif] transition-colors hover:text-[#3a7d44]"
+              className="text-[18px] text-[#1e170e] font-['Inter',sans-serif] font-medium transition-colors hover:text-[#9b5026]"
             >
               {link.label}
             </Link>
@@ -74,7 +89,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
           {/* Language switcher */}
           <button
             onClick={switchLocale}
-            className="flex items-center gap-1.5 text-base text-black font-['Inter',sans-serif] transition-colors hover:text-[#3a7d44] border border-black/20 px-3 py-1 rounded-sm cursor-pointer"
+            className="flex items-center gap-1.5 text-base text-[#1e170e] font-['Inter',sans-serif] font-medium transition-colors hover:text-[#9b5026] border border-[#1e170e]/20 px-3 py-1 rounded-sm cursor-pointer"
             aria-label={`Switch to ${locale === 'en' ? 'Dutch' : 'English'}`}
           >
             <span>{locale === 'en' ? '🇳🇱' : '🇬🇧'}</span>
@@ -85,7 +100,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
             href={reservationUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#3a7d44] text-white px-6 py-2.5 text-base font-['Inter',sans-serif] hover:bg-[#2d6235] transition-colors"
+            className="bg-[#9b5026] text-white px-6 py-3 text-base font-['Inter',sans-serif] rounded-[12px] hover:bg-[#7d3f1e] transition-colors"
           >
             {reserveLabel}
           </a>
@@ -97,41 +112,42 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
           onClick={() => setMobileOpen(true)}
           aria-label={openMenuLabel}
         >
-          <span className="block w-6 h-0.5 bg-black" />
-          <span className="block w-6 h-0.5 bg-black" />
-          <span className="block w-6 h-0.5 bg-black" />
+          <span className="block w-6 h-0.5 bg-[#1e170e]" />
+          <span className="block w-6 h-0.5 bg-[#1e170e]" />
+          <span className="block w-6 h-0.5 bg-[#1e170e]" />
         </button>
       </div>
 
       {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex">
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setMobileOpen(false)}
-          />
-          <div className="relative ml-auto w-72 bg-white h-full flex flex-col p-8 gap-6">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
+          <div className="relative ml-auto w-72 bg-[#eee6d9] h-full flex flex-col p-8 gap-6">
             <button
-              className="self-end text-2xl leading-none"
+              className="self-end text-2xl leading-none text-[#1e170e]"
               onClick={() => setMobileOpen(false)}
               aria-label={closeMenuLabel}
             >
               ×
             </button>
+            {/* Mobile logo */}
+            <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
+              <Image src="/logo/icon-dark.png" alt="" width={52} height={39} className="object-contain shrink-0" />
+              <img src="/logo/wordmark.svg" alt="Netherlands Bagels" width={100} height={31} className="shrink-0" />
+            </Link>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-lg text-black hover:text-[#3a7d44] transition-colors font-['Inter',sans-serif]"
+                className="text-lg text-[#1e170e] hover:text-[#9b5026] transition-colors font-['Inter',sans-serif] font-medium"
               >
                 {link.label}
               </Link>
             ))}
-            {/* Mobile language switcher */}
             <button
               onClick={() => { switchLocale(); setMobileOpen(false) }}
-              className="flex items-center gap-2 text-left text-lg text-black hover:text-[#3a7d44] transition-colors font-['Inter',sans-serif] cursor-pointer"
+              className="flex items-center gap-2 text-left text-lg text-[#1e170e] hover:text-[#9b5026] transition-colors font-['Inter',sans-serif] cursor-pointer"
             >
               <span>{locale === 'en' ? '🇳🇱' : '🇬🇧'}</span>
               <span>{t('switchLang')} — {locale === 'en' ? 'Nederlands' : 'English'}</span>
@@ -140,7 +156,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
               href={reservationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto bg-[#3a7d44] text-white px-6 py-3 text-base text-center font-['Inter',sans-serif]"
+              className="mt-auto bg-[#9b5026] text-white px-6 py-3 text-base text-center font-['Inter',sans-serif] rounded-[12px] hover:bg-[#7d3f1e] transition-colors"
             >
               {reserveLabel}
             </a>

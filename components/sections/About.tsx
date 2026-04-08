@@ -8,67 +8,66 @@ interface AboutProps {
 export default async function About({ imageUrl }: AboutProps) {
   const t = await getTranslations('about')
 
-  const usps = [
-    { icon: '🗽', label: t('usps.recipe') },
-    { icon: '🌿', label: t('usps.natural') },
-    { icon: '✅', label: t('usps.halal') },
-    { icon: '🎉', label: t('usps.catering') },
-  ]
-
-  const headingLines = t('heading').split('\n')
-
   return (
-    <section id="about" className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-          {/* Text */}
-          <div className="flex-1 max-w-[584px]">
-            <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[1.2] lg:leading-[57.6px] text-black mb-9">
-              {headingLines.map((line, i) => (
-                <span key={i}>
-                  {line}
-                  {i < headingLines.length - 1 && <br />}
-                </span>
-              ))}
-            </h2>
-            <div className="flex flex-col gap-4">
-              <p className="font-['Inter',sans-serif] text-base lg:text-[18px] leading-[1.7] text-black">
-                {t('p1')}
-              </p>
-              <p className="font-['Inter',sans-serif] text-base lg:text-[18px] leading-[1.7] text-black">
-                {t('p2')}
-              </p>
-            </div>
+    <section id="about" className="bg-[#9b5026] py-[120px]">
+      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[435px]">
+        <div className="flex flex-col gap-8 items-center">
 
-            {/* USPs */}
-            <div className="grid grid-cols-2 gap-4 mt-10">
-              {usps.map(({ icon, label }) => (
-                <div key={label} className="flex items-center gap-3">
-                  <span className="text-2xl">{icon}</span>
-                  <span className="font-['Inter',sans-serif] text-sm font-medium text-black">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className="w-full lg:w-[584px] shrink-0">
-            <div className="relative w-full h-[400px] lg:h-[500px] overflow-hidden">
-              {imageUrl ? (
+          {/* Icon + heading — Figma grid overlap layout */}
+          <div className="w-full flex justify-center">
+            {/*
+              Figma: both icon and heading are in the same grid cell (col-1 row-1).
+              Icon: 262×179, at (0,0)
+              Heading: ml-[284px] mt-[16px], text-[80px], w-[552px]
+            */}
+            <div
+              className="relative inline-grid"
+              style={{ gridTemplateColumns: 'max-content', gridTemplateRows: 'max-content' }}
+            >
+              {/* Bagel icon — bottom layer */}
+              <div
+                className="relative"
+                style={{ gridColumn: 1, gridRow: 1, width: '262px', height: '179px', zIndex: 1 }}
+              >
                 <Image
-                  src={imageUrl}
-                  alt="Netherlands Bagels interior"
+                  src="/logo/icon-light.png"
+                  alt=""
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 584px"
+                  className="object-contain object-center"
+                  sizes="262px"
                 />
-              ) : (
-                <div className="w-full h-full bg-stone-200 flex items-center justify-center">
-                  <span className="text-stone-400 text-sm">{t('photoSoon')}</span>
-                </div>
-              )}
+              </div>
+
+              {/* Heading — top layer, offset right */}
+              <h2
+                className="font-['Anton',sans-serif] text-white uppercase not-italic"
+                style={{
+                  gridColumn: 1,
+                  gridRow: 1,
+                  fontSize: 'clamp(36px, 5.5vw, 80px)',
+                  lineHeight: '0.925',
+                  marginLeft: 'clamp(140px, 19vw, 284px)',
+                  marginTop: '16px',
+                  width: 'clamp(200px, 38vw, 552px)',
+                  zIndex: 2,
+                  position: 'relative',
+                }}
+              >
+                No-Nonsense<br />New York Bagels
+              </h2>
             </div>
           </div>
+
+          {/* Body text */}
+          <div className="flex flex-col gap-3 text-center w-full">
+            <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[20px] leading-[28px]">
+              {t('p1')}
+            </p>
+            <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[20px] leading-[28px]">
+              {t('p2')}
+            </p>
+          </div>
+
         </div>
       </div>
     </section>

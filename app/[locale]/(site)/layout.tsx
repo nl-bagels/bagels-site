@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Outfit } from 'next/font/google'
+import { Inter, Outfit, Anton, Inria_Sans } from 'next/font/google'
 import '../../globals.css'
 import Header from '@/components/ui/Header'
 import Footer from '@/components/ui/Footer'
@@ -22,6 +22,20 @@ const outfit = Outfit({
   variable: '--font-outfit',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
+})
+
+const anton = Anton({
+  subsets: ['latin'],
+  variable: '--font-anton',
+  display: 'swap',
+  weight: '400',
+})
+
+const inriaSans = Inria_Sans({
+  subsets: ['latin'],
+  variable: '--font-inria',
+  display: 'swap',
+  weight: ['300', '400', '700'],
 })
 
 export async function generateMetadata({
@@ -75,7 +89,7 @@ export default async function SiteLayout({
   const announcement = settings?.announcementBar
 
   return (
-    <html lang={locale} className={`${inter.variable} ${outfit.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${outfit.variable} ${anton.variable} ${inriaSans.variable}`}>
       <body>
         <NextIntlClientProvider messages={messages}>
           {announcement?.enabled && announcement.text && (

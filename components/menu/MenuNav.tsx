@@ -43,7 +43,7 @@ export default function MenuNav({ categories, activeCategory }: MenuNavProps) {
   return (
     <div
       ref={navRef}
-      className={`sticky top-20 z-40 bg-white transition-shadow ${stuck ? 'shadow-sm border-b border-stone-100' : ''}`}
+      className={`sticky top-20 z-40 bg-[#eee6d9] transition-shadow ${stuck ? 'shadow-sm border-b border-[#1e170e]/10' : ''}`}
     >
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
         <div className="flex gap-0 overflow-x-auto no-scrollbar">
@@ -55,8 +55,8 @@ export default function MenuNav({ categories, activeCategory }: MenuNavProps) {
                 onClick={() => handleClick(cat.slug)}
                 className={`shrink-0 px-5 py-4 text-base font-['Inter',sans-serif] border-b-2 transition-colors whitespace-nowrap ${
                   isActive
-                    ? 'border-[#3a7d44] text-[#3a7d44] font-medium'
-                    : 'border-transparent text-[#4a5565] hover:text-black'
+                    ? 'border-[#9b5026] text-[#9b5026] font-medium'
+                    : 'border-transparent text-[#484037] hover:text-[#1e170e]'
                 }`}
               >
                 {cat.label}

@@ -57,7 +57,7 @@ export default async function MenuPreview() {
           </div>
 
           {/* 4-card row */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 w-full">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}

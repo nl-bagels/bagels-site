@@ -13,49 +13,46 @@ export default async function About({ imageUrl }: AboutProps) {
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[435px]">
         <div className="flex flex-col gap-8 items-center">
 
-          {/* Icon + heading — Figma grid overlap layout */}
+          {/* Mobile: icon on top, heading below. Desktop: Figma grid overlap */}
           <div className="w-full flex justify-center">
-            {/*
-              Figma: both icon and heading are in the same grid cell (col-1 row-1).
-              Icon: 262×179, at (0,0)
-              Heading: ml-[284px] mt-[16px], text-[80px], w-[552px]
-            */}
+
+            {/* Mobile layout — stacked */}
+            <div className="flex lg:hidden flex-col items-center gap-4 text-center">
+              <div className="relative w-[160px] h-[110px]">
+                <Image src="/logo/icon-light.png" alt="" fill className="object-contain" sizes="160px" />
+              </div>
+              <h2
+                className="font-['Anton',sans-serif] text-white uppercase"
+                style={{ fontSize: 'clamp(36px, 10vw, 56px)', lineHeight: '0.925' }}
+              >
+                No-Nonsense<br />New York Bagels
+              </h2>
+            </div>
+
+            {/* Desktop layout — Figma grid overlap */}
             <div
-              className="relative inline-grid"
+              className="hidden lg:inline-grid"
               style={{ gridTemplateColumns: 'max-content', gridTemplateRows: 'max-content' }}
             >
-              {/* Bagel icon — bottom layer */}
               <div
                 className="relative"
                 style={{ gridColumn: 1, gridRow: 1, width: '262px', height: '179px', zIndex: 1 }}
               >
-                <Image
-                  src="/logo/icon-light.png"
-                  alt=""
-                  fill
-                  className="object-contain object-center"
-                  sizes="262px"
-                />
+                <Image src="/logo/icon-light.png" alt="" fill className="object-contain object-center" sizes="262px" />
               </div>
-
-              {/* Heading — top layer, offset right */}
               <h2
                 className="font-['Anton',sans-serif] text-white uppercase not-italic"
                 style={{
-                  gridColumn: 1,
-                  gridRow: 1,
-                  fontSize: 'clamp(36px, 5.5vw, 80px)',
-                  lineHeight: '0.925',
-                  marginLeft: 'clamp(140px, 19vw, 284px)',
-                  marginTop: '16px',
-                  width: 'clamp(200px, 38vw, 552px)',
-                  zIndex: 2,
-                  position: 'relative',
+                  gridColumn: 1, gridRow: 1,
+                  fontSize: '80px', lineHeight: '0.925',
+                  marginLeft: '284px', marginTop: '16px',
+                  width: '552px', zIndex: 2, position: 'relative',
                 }}
               >
                 No-Nonsense<br />New York Bagels
               </h2>
             </div>
+
           </div>
 
           {/* Body text */}

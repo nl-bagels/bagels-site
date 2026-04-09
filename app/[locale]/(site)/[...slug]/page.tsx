@@ -1,24 +1,9 @@
 import { notFound } from 'next/navigation'
-import { getAllPublishedPages, getPageBySlug, getOpenJobs, getSiteSettings } from '@/lib/payload'
+import { getPageBySlug, getOpenJobs, getSiteSettings } from '@/lib/payload'
 import BlockRenderer from '@/components/blocks/BlockRenderer'
 
 export const revalidate = 60
-
-const RESERVED_SLUGS = ['menu', 'jobs']
-
-export async function generateStaticParams() {
-  try {
-    const pages = await getAllPublishedPages()
-    return pages
-      .filter((p) => {
-        const s = (p as any).slug as string | null | undefined
-        return s && !RESERVED_SLUGS.includes(s) && s !== '/'
-      })
-      .map((p) => ({ slug: ((p as any).slug as string).split('/').filter(Boolean) }))
-  } catch {
-    return []
-  }
-}
+export const dynamic = 'force-dynamic'
 
 export default async function DynamicPage({
   params,

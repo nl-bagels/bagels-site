@@ -63,3 +63,66 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* Rich text content styles */
+.rich-text h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #1e170e;
+  margin-bottom: 2rem;
+}
+
+.rich-text h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #1e170e;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-text h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  color: #1e170e;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.rich-text p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #484037;
+  margin-bottom: 1rem;
+}
+
+.rich-text ul, .rich-text ol {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #484037;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.rich-text ul { list-style-type: disc; }
+.rich-text ol { list-style-type: decimal; }
+
+.rich-text li {
+  margin-bottom: 0.25rem;
+}
+
+.rich-text a {
+  color: #9b5026;
+  text-decoration: underline;
+}
+
+.rich-text strong {
+  font-weight: 600;
+  color: #1e170e;
+}

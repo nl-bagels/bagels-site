@@ -51,7 +51,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
         scrolled ? 'shadow-sm' : ''
       }`}
     >
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-[228px] h-20 flex items-center justify-between">
+      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-[13px] shrink-0">

@@ -25,7 +25,7 @@ export default function Hero({
       {/* Dark rounded card */}
       <div
         className="mx-4 sm:mx-6 lg:mx-6 rounded-[40px] overflow-hidden relative bg-[#1e170e]"
-        style={{ minHeight: 'clamp(600px, 55vw, 1045px)' }}
+        style={{ minHeight: 'clamp(500px, 45vw, 1045px)' }}
       >
 
         {/* Background media */}

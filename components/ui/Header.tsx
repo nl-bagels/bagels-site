@@ -51,7 +51,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
         scrolled ? 'shadow-sm' : ''
       }`}
     >
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px] h-20 flex items-center justify-between">
+      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-[228px] h-20 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-[13px] shrink-0">
@@ -75,7 +75,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden xl:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -108,7 +108,7 @@ export default function Header({ reservationUrl = '#', navData }: HeaderProps) {
 
         {/* Mobile burger */}
         <button
-          className="lg:hidden flex flex-col gap-1.5 p-2"
+          className="xl:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen(true)}
           aria-label={openMenuLabel}
         >

@@ -37,6 +37,7 @@ export default async function DynamicPage({
       blocks={layout}
       siteSettings={settings}
       openJobs={openJobs.map((j) => ({ id: String(j.id), title: j.title, description: j.description }))}
+      locale={payloadLocale}
     />
   )
 }

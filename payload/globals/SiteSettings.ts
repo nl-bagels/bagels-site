@@ -36,6 +36,7 @@ export const SiteSettings: GlobalConfig = {
       admin: { description: 'Use the structured opening hours below instead.' },
     },
     { name: 'reservationUrl', type: 'text', label: 'Reservation URL (Tebi)' },
+    { name: 'orderUrl', type: 'text', label: 'Order Online URL (Tebi Preorder)' },
     {
       name: 'menuFooterNote',
       type: 'richText',

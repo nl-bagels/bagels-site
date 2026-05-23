@@ -6,6 +6,8 @@
     "jobs": "Jobs",
     "contact": "Contact",
     "reserve": "Reserve a table →",
+    "order": "Order Online →",
+    "whatsapp": "WhatsApp",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "switchLang": "NL"
@@ -57,28 +59,37 @@
   },
   "catering": {
     "heading": "Catering",
-    "subtitle": "Bring the taste of New York to your next event. We offer catering packages for all occasions.",
+    "tagline": "We love to party. Let us make yours extra-special.",
     "cta": "Contact us for catering",
+    "addons": "SO MANY CHOICES! Treat yourself with delicious add-ons.",
+    "orderNote": "Catering orders must be placed at least 48 hours in advance.",
+    "orderContact": "Email us at hello@netherlandsbagels.com or WhatsApp +31 6 42661915",
+    "deliveryHeading": "Delivery",
+    "deliveryLocal": "Delivery in The Hague: +€15",
+    "deliveryPickup": "Pick up at our café: free of charge",
+    "deliveryNL": "Delivery across the Netherlands: contact us for rates",
+    "priceNote": "Pricelist valid for 2026.",
+    "b2bNote": "We also work with businesses — restaurants, offices, events. For B2B partnerships, reach out at hello@netherlandsbagels.com",
     "packages": {
       "basic": {
-        "name": "Basic",
-        "subtitle": "Perfect for small gatherings",
-        "items": ["Assorted bagels", "Cream cheese selection", "Fresh coffee"]
+        "name": "Basic Box €55",
+        "subtitle": "",
+        "items": ["10 loose bagels", "1 large cream cheese", "1 large scallion cream cheese"]
       },
       "super": {
-        "name": "Super",
-        "subtitle": "Ideal for team meetings",
-        "items": ["Premium bagel selection", "Multiple spreads", "Coffee & tea", "Fresh fruit"]
+        "name": "Super Box €120",
+        "subtitle": "",
+        "items": ["10 bagel sandwiches of your choice, cut in half"]
       },
       "brunch": {
-        "name": "Brunch",
-        "subtitle": "Complete brunch experience",
-        "items": ["Bagel sandwiches", "Sweet treats", "Full beverage service", "Seasonal salads"]
+        "name": "Brunch Box €160",
+        "subtitle": "",
+        "items": ["10 bagel sandwiches of your choice, cut in half", "10 NY style chocolate chip cookies OR 10 portions of dessert of your choice"]
       },
       "deluxe": {
-        "name": "Deluxe",
-        "subtitle": "Ultimate catering package",
-        "items": ["Custom menu", "Premium ingredients", "Full setup", "Dedicated service"]
+        "name": "Deluxe Box €180",
+        "subtitle": "",
+        "items": ["10 bagel sandwiches of your choice, cut in half", "10 NY style chocolate chip cookies OR 10 portions of dessert of your choice", "1 liter fresh squeezed orange juice", "1 liter organic apple juice"]
       }
     }
   },
@@ -132,6 +143,12 @@
       "seasonal": "Seasonal",
       "gluten_free": "GF"
     }
+  },
+  "announcements": {
+    "heading": "News & Offers",
+    "subheading": "What's new at Netherlands Bagels",
+    "viewAll": "See all news",
+    "empty": "No news at the moment. Check back soon!"
   },
   "metadata": {
     "title": "Netherlands Bagels | New York-Style Bagels in The Hague",

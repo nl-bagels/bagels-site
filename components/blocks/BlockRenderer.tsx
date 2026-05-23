@@ -8,14 +8,16 @@ import RichTextBlockComponent from './RichTextBlockComponent'
 import CTABlockComponent from './CTABlockComponent'
 import MenuPageHeaderBlockComponent from './MenuPageHeaderBlockComponent'
 import AllergiesNoteBlockComponent from './AllergiesNoteBlockComponent'
+import AnnouncementsBlockComponent from './AnnouncementsBlockComponent'
 
 interface BlockRendererProps {
   blocks: any[]
   siteSettings?: any
   openJobs?: any[]
+  locale?: string
 }
 
-export default function BlockRenderer({ blocks, siteSettings, openJobs = [] }: BlockRendererProps) {
+export default function BlockRenderer({ blocks, siteSettings, openJobs = [], locale = 'en' }: BlockRendererProps) {
   return (
     <>
       {blocks.map((block, i) => {
@@ -40,6 +42,8 @@ export default function BlockRenderer({ blocks, siteSettings, openJobs = [] }: B
             return <MenuPageHeaderBlockComponent key={i} block={block} />
           case 'allergiesNoteBlock':
             return <AllergiesNoteBlockComponent key={i} block={block} />
+          case 'announcementsBlock':
+            return <AnnouncementsBlockComponent key={i} block={block} locale={locale} />
           default:
             return null
         }

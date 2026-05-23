@@ -45,6 +45,7 @@ export default async function HomePage({
         blocks={layout}
         siteSettings={settings}
         openJobs={openJobs.map((j) => ({ id: String(j.id), title: j.title }))}
+        locale={payloadLocale}
       />
     )
   }

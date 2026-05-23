@@ -9,6 +9,7 @@ import { RichTextBlock } from '../blocks/RichTextBlock.ts'
 import { CTABlock } from '../blocks/CTABlock.ts'
 import { MenuPageHeaderBlock } from '../blocks/MenuPageHeaderBlock.ts'
 import { AllergiesNoteBlock } from '../blocks/AllergiesNoteBlock.ts'
+import { AnnouncementsBlock } from '../blocks/AnnouncementsBlock.ts'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -60,6 +61,7 @@ export const Pages: CollectionConfig = {
         CTABlock,
         MenuPageHeaderBlock,
         AllergiesNoteBlock,
+        AnnouncementsBlock,
       ],
     },
   ],

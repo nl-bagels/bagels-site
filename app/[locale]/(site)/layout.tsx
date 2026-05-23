@@ -101,6 +101,8 @@ export default async function SiteLayout({
           )}
           <Header
             reservationUrl={settings?.reservationUrl ?? '#'}
+            orderUrl={(settings as any)?.orderUrl ?? undefined}
+            whatsappNumber={settings?.whatsapp ?? undefined}
             navData={navData}
           />
           <StructuredData />

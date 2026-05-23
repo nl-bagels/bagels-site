@@ -93,6 +93,31 @@ export async function getPageBySlug(slug: string, locale: Locale = 'en') {
   return result.docs[0] ?? null
 }
 
+export async function getAnnouncements(locale: Locale = 'en', limit = 10) {
+  const payload = await getPayloadClient()
+  const now = new Date().toISOString()
+  const result = await payload.find({
+    collection: 'announcements' as any,
+    where: {
+      and: [
+        { isActive: { equals: true } },
+        {
+          or: [
+            { expiresAt: { exists: false } },
+            { expiresAt: { greater_than: now } },
+          ],
+        },
+      ],
+    },
+    sort: '-publishedAt',
+    limit,
+    locale,
+    fallbackLocale: 'en',
+    depth: 1,
+  })
+  return result.docs
+}
+
 export async function getAllPublishedPages() {
   const payload = await getPayloadClient()
   const result = await payload.find({

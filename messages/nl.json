@@ -6,6 +6,8 @@
     "jobs": "Vacatures",
     "contact": "Contact",
     "reserve": "Reserveer een tafel →",
+    "order": "Bestel Online →",
+    "whatsapp": "WhatsApp",
     "openMenu": "Menu openen",
     "closeMenu": "Menu sluiten",
     "switchLang": "EN"
@@ -57,28 +59,37 @@
   },
   "catering": {
     "heading": "Catering",
-    "subtitle": "Breng de smaak van New York naar uw volgende evenement. Wij bieden cateringpakketten voor alle gelegenheden.",
+    "tagline": "Wij houden van feesten. Laat ons van jou iets extra-speciaals maken.",
     "cta": "Neem contact op voor catering",
+    "addons": "ZOVEEL KEUZE! Verwenner jezelf met heerlijke add-ons.",
+    "orderNote": "Cateringbestellingen moeten minimaal 48 uur van tevoren worden geplaatst.",
+    "orderContact": "Stuur een e-mail naar hello@netherlandsbagels.com of WhatsApp +31 6 42661915",
+    "deliveryHeading": "Bezorging",
+    "deliveryLocal": "Bezorging in Den Haag: +€15",
+    "deliveryPickup": "Ophalen bij ons café: gratis",
+    "deliveryNL": "Bezorging door heel Nederland: neem contact op voor tarieven",
+    "priceNote": "Prijslijst geldig voor 2026.",
+    "b2bNote": "Wij werken ook met bedrijven — restaurants, kantoren, evenementen. Voor B2B-samenwerkingen, neem contact op via hello@netherlandsbagels.com",
     "packages": {
       "basic": {
-        "name": "Basic",
-        "subtitle": "Perfect voor kleine bijeenkomsten",
-        "items": ["Gevarieerde bagels", "Roomkaasselectie", "Verse koffie"]
+        "name": "Basic Box €55",
+        "subtitle": "",
+        "items": ["10 losse bagels", "1 grote roomkaas", "1 grote bieslookroomkaas"]
       },
       "super": {
-        "name": "Super",
-        "subtitle": "Ideaal voor teammeetings",
-        "items": ["Premium bagelselectie", "Meerdere spreads", "Koffie & thee", "Vers fruit"]
+        "name": "Super Box €120",
+        "subtitle": "",
+        "items": ["10 bagelsandwiches naar keuze, doormidden gesneden"]
       },
       "brunch": {
-        "name": "Brunch",
-        "subtitle": "Complete brunchervaring",
-        "items": ["Bagelsandwiches", "Zoete lekkernijen", "Volledige drankenservice", "Seizoenssalades"]
+        "name": "Brunch Box €160",
+        "subtitle": "",
+        "items": ["10 bagelsandwiches naar keuze, doormidden gesneden", "10 NY-stijl chocoladechipcookies OF 10 porties dessert naar keuze"]
       },
       "deluxe": {
-        "name": "Deluxe",
-        "subtitle": "Ultiem cateringpakket",
-        "items": ["Op maat menu", "Premium ingrediënten", "Volledige opzet", "Toegewijde service"]
+        "name": "Deluxe Box €180",
+        "subtitle": "",
+        "items": ["10 bagelsandwiches naar keuze, doormidden gesneden", "10 NY-stijl chocoladechipcookies OF 10 porties dessert naar keuze", "1 liter vers geperst sinaasappelsap", "1 liter biologisch appelsap"]
       }
     }
   },
@@ -132,6 +143,12 @@
       "seasonal": "Seizoen",
       "gluten_free": "GV"
     }
+  },
+  "announcements": {
+    "heading": "Nieuws & Aanbiedingen",
+    "subheading": "Wat er nieuw is bij Netherlands Bagels",
+    "viewAll": "Zie al het nieuws",
+    "empty": "Momenteel geen nieuws. Kom snel terug!"
   },
   "metadata": {
     "title": "Netherlands Bagels | New Yorkse Bagels in Den Haag",

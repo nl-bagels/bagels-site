@@ -12,6 +12,7 @@ import { MenuItems } from "./payload/collections/MenuItems.ts";
 import { MenuCategories } from "./payload/collections/MenuCategories.ts";
 import { Jobs } from "./payload/collections/Jobs.ts";
 import { Pages } from "./payload/collections/Pages.ts";
+import { Announcements } from "./payload/collections/Announcements.ts";
 import { SiteSettings } from "./payload/globals/SiteSettings.ts";
 import { Navigation } from "./payload/globals/Navigation.ts";
 import { FooterContent } from "./payload/globals/FooterContent.ts";
@@ -43,6 +44,7 @@ export default buildConfig({
     MenuCategories,
     Jobs,
     Pages,
+    Announcements,
     {
       slug: "users",
       auth: true,

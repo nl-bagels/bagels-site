@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "payload migrate && next build",
-    "build_migrate": "npm run payload -- migrate && next build",
+    "build_migrate": "CI=true npm run payload -- migrate && next build",
     "start": "next start",
     "lint": "next lint",
     "payload": "payload"

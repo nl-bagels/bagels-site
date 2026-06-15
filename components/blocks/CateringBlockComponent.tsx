@@ -4,7 +4,7 @@ export default function CateringBlockComponent({ block, siteSettings }: { block:
 
   return (
     <section id="catering" className="bg-white py-20 lg:py-24">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="text-center mb-14">
           <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">{block.heading}</h2>
           <p className="font-['Inter',sans-serif] text-[#4a5565] text-base lg:text-[18px] max-w-[672px] mx-auto leading-7">{block.subtitle}</p>

@@ -38,7 +38,7 @@ export default async function Footer({
 
   return (
     <footer className="bg-black text-[#eee6d9]">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px] pt-12 pb-0">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px] pt-12 pb-0">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 pb-10">
 
           {/* Brand */}

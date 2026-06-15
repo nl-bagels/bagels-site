@@ -5,7 +5,7 @@ import { getMenuCategories } from '@/lib/payload'
 export default async function MenuPreviewBlockComponent({ block }: { block: any }) {
   return (
     <section id="menu" className="bg-[#f5f5f5] py-20 lg:py-24">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="text-center mb-12">
           <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[57.6px] text-black mb-4">
             {block.heading}

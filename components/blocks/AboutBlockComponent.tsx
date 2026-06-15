@@ -9,7 +9,7 @@ export default function AboutBlockComponent({ block }: { block: any }) {
 
   return (
     <section id="about" className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           <div className="flex-1 max-w-[584px]">
             <h2 className="font-['Outfit',sans-serif] font-semibold text-4xl lg:text-[48px] leading-[1.2] lg:leading-[57.6px] text-black mb-9">

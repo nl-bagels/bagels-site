@@ -17,8 +17,8 @@ export default async function Jobs({ jobs = [], contactEmail = 'hello@netherland
   const hasOpenJobs = jobs.length > 0
 
   return (
-    <section id="jobs" className="bg-[#9b5026] py-[120px]">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+    <section id="jobs" className="bg-[#9b5026] py-12 sm:py-20 lg:py-[120px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="flex flex-col gap-12">
           {/* Top row: text + button */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-7 items-start lg:items-center">

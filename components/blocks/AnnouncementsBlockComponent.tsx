@@ -30,8 +30,8 @@ export default async function AnnouncementsBlockComponent({
   if (items.length === 0) return null
 
   return (
-    <section className="bg-[#eee6d9] px-6 py-20">
-      <div className="max-w-[1240px] mx-auto flex flex-col gap-10">
+    <section className="bg-[#eee6d9] px-3 sm:px-6 py-12 sm:py-20">
+      <div className="max-w-[1240px] mx-auto flex flex-col gap-6 sm:gap-10">
         {block.heading && (
           <h2
             className="font-['Anton',sans-serif] uppercase text-[#1e170e] text-center"
@@ -40,11 +40,11 @@ export default async function AnnouncementsBlockComponent({
             {block.heading}
           </h2>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {items.map((item: any) => (
             <div
               key={item.id}
-              className="bg-white rounded-[20px] p-8 flex flex-col gap-4"
+              className="bg-white rounded-xl sm:rounded-[20px] p-4 sm:p-8 flex flex-col gap-3 sm:gap-4"
             >
               <div className="flex items-center justify-between gap-3">
                 <span

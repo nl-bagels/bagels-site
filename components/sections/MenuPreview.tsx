@@ -40,8 +40,8 @@ export default async function MenuPreview() {
         }))
 
   return (
-    <section id="menu" className="bg-[#eee6d9] py-[120px]">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+    <section id="menu" className="bg-[#eee6d9] py-12 sm:py-20 lg:py-[120px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="flex flex-col gap-12 items-center">
           {/* Centered header */}
           <div className="flex flex-col gap-4 items-center text-center">
@@ -57,7 +57,7 @@ export default async function MenuPreview() {
           </div>
 
           {/* 4-card row */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 wide:grid-cols-4 gap-6 w-full">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}

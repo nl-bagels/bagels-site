@@ -15,34 +15,34 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
   }))
 
   return (
-    <section id="catering" className="bg-[#eee6d9] px-6">
+    <section id="catering" className="bg-[#eee6d9] px-3 sm:px-4 lg:px-6">
       {/* Dark rounded card */}
-      <div className="bg-[#1e170e] rounded-[40px] py-[120px] px-4 sm:px-12 lg:px-[228px] flex flex-col gap-12 items-center">
+      <div className="bg-[#1e170e] rounded-[40px] py-12 sm:py-20 lg:py-[120px] px-3 sm:px-8 lg:px-[228px] flex flex-col gap-6 sm:gap-12 items-center">
         {/* Header */}
-        <div className="flex flex-col gap-4 items-center text-center text-[#eee6d9] max-w-[672px]">
+        <div className="flex flex-col gap-2 sm:gap-4 items-center text-center text-[#eee6d9] max-w-[672px] px-2">
           <h2
             className="font-['Anton',sans-serif] uppercase"
-            style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
+            style={{ fontSize: 'clamp(28px, 4vw, 60px)', lineHeight: '1.2' }}
           >
             {t('heading')}
           </h2>
-          <p className="font-['Inter',sans-serif] font-normal text-[20px] leading-[28px]">
+          <p className="font-['Inter',sans-serif] font-normal text-base sm:text-[20px] leading-relaxed sm:leading-[28px]">
             {t('tagline')}
           </p>
         </div>
 
         {/* Packages */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 wide:grid-cols-4 gap-3 sm:gap-4 w-full">
           {packages.map((pkg) => (
-            <div key={pkg.name} className="bg-white rounded-[24px] flex flex-col overflow-hidden">
+            <div key={pkg.name} className="bg-white rounded-2xl sm:rounded-[24px] flex flex-col overflow-hidden">
               {/* Name */}
-              <div className="p-8 pb-4">
-                <h3 className="font-['Anton',sans-serif] text-[24px] leading-[36px] text-[#1e170e]">
+              <div className="p-4 sm:p-8 pb-2 sm:pb-4">
+                <h3 className="font-['Anton',sans-serif] text-lg sm:text-[24px] leading-tight sm:leading-[36px] text-[#1e170e]">
                   {pkg.name}
                 </h3>
               </div>
               {/* Items */}
-              <div className="flex flex-col gap-2 p-8 pt-4 flex-1">
+              <div className="flex flex-col gap-2 p-4 sm:p-8 pt-2 sm:pt-4 flex-1">
                 {pkg.items.map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <svg
@@ -57,7 +57,7 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className="font-['Inter',sans-serif] text-[15px] text-[#1e170e] leading-[22px]">
+                    <span className="font-['Inter',sans-serif] text-xs sm:text-[15px] text-[#1e170e] leading-snug sm:leading-[22px]">
                       {item}
                     </span>
                   </div>

@@ -9,7 +9,7 @@ export default async function About({ imageUrl }: AboutProps) {
   const t = await getTranslations('about')
 
   return (
-    <section id="about" className="bg-[#9b5026] py-[120px]">
+    <section id="about" className="bg-[#9b5026] py-12 sm:py-20 lg:py-[120px]">
       <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[435px]">
         <div className="flex flex-col gap-8 items-center">
 

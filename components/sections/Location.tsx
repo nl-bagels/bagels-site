@@ -23,8 +23,8 @@ export default async function Location({
   ]
 
   return (
-    <section id="contact" className="bg-[#eee6d9] py-[120px]">
-      <div className="max-w-[1672px] mx-auto px-4 sm:px-8 lg:px-[228px]">
+    <section id="contact" className="bg-[#eee6d9] py-12 sm:py-20 lg:py-[120px]">
+      <div className="max-w-[1672px] mx-auto px-3 sm:px-4 md:px-8 lg:px-[228px]">
         <div className="flex flex-col lg:flex-row gap-[72px] items-start">
           {/* Map */}
           <div className="w-full lg:flex-1 shrink-0 rounded-[40px] overflow-hidden">

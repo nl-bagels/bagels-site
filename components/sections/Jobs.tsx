@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 
 interface Job {
   id: string
   title: string
-  description?: string
 }
 
 interface JobsProps {
@@ -31,10 +31,9 @@ export default async function Jobs({
   const text = {
     heading: content?.heading?.trim() || t('heading'),
     subtitle: content?.subtitle?.trim() || t('subtitle'),
-    applyNow: content?.applyNowLabel?.trim() || t('applyNow'),
+    viewDetails: t('viewDetails'),
     openApplication: content?.openApplicationLabel?.trim() || t('openApplication'),
     sendCV: content?.sendCVLabel?.trim() || t('sendCV'),
-    applicationSubject: content?.applicationSubjectPrefix?.trim() || t('applicationSubject'),
     openApplicationSubject: content?.openApplicationSubject?.trim() || t('openApplicationSubject'),
   }
 
@@ -71,17 +70,12 @@ export default async function Jobs({
                   <h3 className="font-['Anton',sans-serif] text-[24px] text-[#eee6d9] mb-2">
                     {job.title}
                   </h3>
-                  {job.description && (
-                    <p className="font-['Inter',sans-serif] text-[#eee6d9]/80 text-[16px]">
-                      {job.description}
-                    </p>
-                  )}
-                  <a
-                    href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.applicationSubject + job.title)}`}
+                  <Link
+                    href={`/jobs/${encodeURIComponent(job.id)}`}
                     className="inline-block mt-4 text-white font-['Inter',sans-serif] text-[16px] font-medium underline hover:no-underline transition-all"
                   >
-                    {text.applyNow}
-                  </a>
+                    {text.viewDetails}
+                  </Link>
                 </div>
               ))}
             </div>

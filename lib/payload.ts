@@ -72,6 +72,20 @@ export async function getOpenJobs() {
   return result.docs
 }
 
+export async function getOpenJobById(id: string) {
+  try {
+    const payload = await getPayloadClient()
+    const job = await payload.findByID({
+      collection: 'jobs',
+      id,
+    })
+
+    return job.isOpen ? job : null
+  } catch {
+    return null
+  }
+}
+
 export async function getNavigation(locale: Locale = 'en') {
   const payload = await getPayloadClient()
   return payload.findGlobal({ slug: 'navigation', locale, fallbackLocale: 'en' })

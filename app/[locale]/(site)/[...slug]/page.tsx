@@ -36,7 +36,7 @@ export default async function DynamicPage({
     <BlockRenderer
       blocks={layout}
       siteSettings={settings}
-      openJobs={openJobs.map((j) => ({ id: String(j.id), title: j.title, description: j.description }))}
+      openJobs={openJobs.map((j) => ({ id: String(j.id), title: j.title }))}
       locale={payloadLocale}
     />
   )

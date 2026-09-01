@@ -76,7 +76,12 @@ export default async function AnnouncementsBlockComponent({
                 )}
               </div>
               <h3 className="font-['Inter',sans-serif] font-semibold text-[18px] text-[#1e170e] leading-6">
-                {item.title}
+                <Link
+                  href="/news"
+                  className="transition-colors hover:text-[#9b5026] hover:underline focus-visible:text-[#9b5026] focus-visible:underline"
+                >
+                  {item.title}
+                </Link>
               </h3>
               {item.content && (
                 <div className="font-['Inter',sans-serif] text-[14px] text-[#484037] leading-5 line-clamp-3">

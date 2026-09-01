@@ -18,14 +18,17 @@ const typeLabels: Record<string, Record<string, string>> = {
 interface AnnouncementsBlockComponentProps {
   block: { heading?: string; maxItems?: number }
   locale?: string
+  items?: any[]
 }
 
 export default async function AnnouncementsBlockComponent({
   block,
   locale = 'en',
+  items: providedItems,
 }: AnnouncementsBlockComponentProps) {
   const t = await getTranslations('announcements')
-  const items = await getAnnouncements(locale as 'en' | 'nl', block.maxItems ?? 3)
+  const maxItems = block.maxItems ?? 3
+  const items = providedItems ?? await getAnnouncements(locale as 'en' | 'nl', maxItems)
 
   if (items.length === 0) return null
 
@@ -40,7 +43,15 @@ export default async function AnnouncementsBlockComponent({
             {block.heading}
           </h2>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div
+          className={`grid grid-cols-1 gap-4 sm:gap-6 w-full mx-auto ${
+            maxItems === 1
+              ? 'max-w-[860px]'
+              : maxItems === 2
+                ? 'sm:grid-cols-2 max-w-[1000px]'
+                : 'sm:grid-cols-2 lg:grid-cols-3'
+          }`}
+        >
           {items.map((item: any) => (
             <div
               key={item.id}

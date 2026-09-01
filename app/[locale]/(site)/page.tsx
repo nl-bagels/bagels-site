@@ -8,8 +8,10 @@ import Catering from '@/components/sections/Catering'
 import Location from '@/components/sections/Location'
 import Jobs from '@/components/sections/Jobs'
 import BlockRenderer from '@/components/blocks/BlockRenderer'
+import AnnouncementsBlockComponent from '@/components/blocks/AnnouncementsBlockComponent'
 import {
   getActiveHero,
+  getAnnouncements,
   getHomepageContent,
   getOpenJobs,
   getPageBySlug,
@@ -25,6 +27,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'hero' })
+  const announcementsT = await getTranslations({ locale, namespace: 'announcements' })
   const payloadLocale = (locale === 'nl' ? 'nl' : 'en') as 'en' | 'nl'
 
   let hero = null
@@ -32,14 +35,16 @@ export default async function HomePage({
   let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
   let homepageContent: Awaited<ReturnType<typeof getHomepageContent>> | null = null
   let homePage = null
+  let latestAnnouncements: Awaited<ReturnType<typeof getAnnouncements>> = []
 
   try {
-    ;[hero, openJobs, settings, homepageContent, homePage] = await Promise.all([
+    ;[hero, openJobs, settings, homepageContent, homePage, latestAnnouncements] = await Promise.all([
       getActiveHero(),
       getOpenJobs(),
       getSiteSettings(payloadLocale),
       getHomepageContent(payloadLocale),
       getPageBySlug('/', payloadLocale),
+      getAnnouncements(payloadLocale, 1),
     ])
   } catch {
     // DB not available in dev without env vars
@@ -89,19 +94,26 @@ export default async function HomePage({
       {/* 3. MenuHighlight — "New Fresh Summer Menu" with overlapping photos */}
       <MenuHighlight content={homepageContent?.menuHighlight} />
 
-      {/* 4. About — brown #9b5026 section with logo + heading */}
+      {/* 4. Latest announcement */}
+      <AnnouncementsBlockComponent
+        block={{ heading: announcementsT('heading'), maxItems: 1 }}
+        locale={payloadLocale}
+        items={latestAnnouncements}
+      />
+
+      {/* 5. About — brown #9b5026 section with logo + heading */}
       <About content={homepageContent?.about} />
 
-      {/* 5. OurMenu — 4 dark category cards on vanilla bg */}
+      {/* 6. OurMenu — 4 dark category cards on vanilla bg */}
       <MenuPreview locale={payloadLocale} content={homepageContent?.menuPreview} />
 
-      {/* 6. Catering — dark rounded card with 4 white package tiles */}
+      {/* 7. Catering — dark rounded card with 4 white package tiles */}
       <Catering
         contactEmail={settings?.contactEmail ?? undefined}
         content={homepageContent?.catering}
       />
 
-      {/* 7. Visit Us — map + address/hours/contact */}
+      {/* 8. Visit Us — map + address/hours/contact */}
       <Location
         address={settings?.address ?? undefined}
         phone={settings?.phone ?? undefined}
@@ -110,7 +122,7 @@ export default async function HomePage({
         content={homepageContent?.location}
       />
 
-      {/* 8. Join Our Team — brown section with photos */}
+      {/* 9. Join Our Team — brown section with photos */}
       <Jobs
         jobs={openJobs.map((j) => ({
           id: String(j.id),

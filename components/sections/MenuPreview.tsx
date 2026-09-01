@@ -10,12 +10,24 @@ const FALLBACK_IMAGES: Record<string, string> = {
   drinks: '/images/menu-drinks.jpg',
 }
 
-export default async function MenuPreview() {
+interface MenuPreviewProps {
+  locale?: 'en' | 'nl'
+  content?: {
+    heading?: string | null
+    subtitle?: string | null
+    viewFullLabel?: string | null
+  } | null
+}
+
+export default async function MenuPreview({ locale = 'en', content }: MenuPreviewProps) {
   const t = await getTranslations('menuPreview')
+  const heading = content?.heading?.trim() || t('heading')
+  const subtitle = content?.subtitle?.trim() || t('subtitle')
+  const viewFullLabel = content?.viewFullLabel?.trim() || t('viewFull')
 
   let cmsCategories: { slug: string; label: string; description: string; imageUrl: string | null }[] = []
   try {
-    const raw = await getMenuCategories('en')
+    const raw = await getMenuCategories(locale)
     cmsCategories = raw
       .filter((c) => ['savory', 'sweet', 'loose_bagels', 'drinks'].includes(c.slug as string))
       .map((c) => ({
@@ -49,10 +61,10 @@ export default async function MenuPreview() {
               className="font-['Anton',sans-serif] text-[#1e170e] uppercase"
               style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
             >
-              {t('heading')}
+              {heading}
             </h2>
             <p className="font-['Inter',sans-serif] text-[#484037] text-[20px] leading-[28px]">
-              {t('subtitle')}
+              {subtitle}
             </p>
           </div>
 
@@ -100,7 +112,7 @@ export default async function MenuPreview() {
             href="/menu"
             className="inline-flex items-center justify-center bg-[#9b5026] text-white px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#7d3f1e] transition-colors"
           >
-            {t('viewFull')}
+            {viewFullLabel}
           </Link>
         </div>
       </div>

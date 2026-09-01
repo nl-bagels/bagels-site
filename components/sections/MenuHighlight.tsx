@@ -2,8 +2,19 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 
-export default async function MenuHighlight() {
+interface MenuHighlightProps {
+  content?: {
+    heading?: string | null
+    subtitle?: string | null
+    ctaLabel?: string | null
+  } | null
+}
+
+export default async function MenuHighlight({ content }: MenuHighlightProps) {
   const t = await getTranslations('menuHighlight')
+  const heading = content?.heading?.trim() || t('heading')
+  const subtitle = content?.subtitle?.trim() || t('subtitle')
+  const ctaLabel = content?.ctaLabel?.trim() || t('cta')
 
   return (
     <section className="bg-[#eee6d9] overflow-hidden">
@@ -16,16 +27,16 @@ export default async function MenuHighlight() {
             className="font-['Anton',sans-serif] text-[#1e170e] uppercase"
             style={{ fontSize: 'clamp(40px, 12vw, 64px)', lineHeight: '1' }}
           >
-            {t('heading')}
+            {heading}
           </h2>
           <p className="font-['Inter',sans-serif] text-[#484037] text-[18px] leading-[26px]">
-            {t('subtitle')}
+            {subtitle}
           </p>
           <Link
             href="/menu"
             className="inline-flex items-center justify-center self-start bg-[#9b5026] text-white px-8 py-3 text-[18px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#7d3f1e] transition-colors"
           >
-            {t('cta')}
+            {ctaLabel}
           </Link>
         </div>
 
@@ -66,16 +77,16 @@ export default async function MenuHighlight() {
               className="font-['Anton',sans-serif] text-[#1e170e] uppercase"
               style={{ fontSize: '72px', lineHeight: '72px' }}
             >
-              {t('heading')}
+              {heading}
             </h2>
             <p className="font-['Inter',sans-serif] text-[#484037] text-[20px] leading-[28px]" style={{ maxWidth: '474px' }}>
-              {t('subtitle')}
+              {subtitle}
             </p>
             <Link
               href="/menu"
               className="inline-flex items-center justify-center self-start bg-[#9b5026] text-white px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#7d3f1e] transition-colors"
             >
-              {t('cta')}
+              {ctaLabel}
             </Link>
           </div>
 

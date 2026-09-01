@@ -10,11 +10,33 @@ interface Job {
 interface JobsProps {
   jobs?: Job[]
   contactEmail?: string
+  content?: {
+    heading?: string | null
+    subtitle?: string | null
+    applyNowLabel?: string | null
+    openApplicationLabel?: string | null
+    sendCVLabel?: string | null
+    applicationSubjectPrefix?: string | null
+    openApplicationSubject?: string | null
+  } | null
 }
 
-export default async function Jobs({ jobs = [], contactEmail = 'hello@netherlandsbagels.com' }: JobsProps) {
+export default async function Jobs({
+  jobs = [],
+  contactEmail = 'hello@netherlandsbagels.com',
+  content,
+}: JobsProps) {
   const t = await getTranslations('jobs')
   const hasOpenJobs = jobs.length > 0
+  const text = {
+    heading: content?.heading?.trim() || t('heading'),
+    subtitle: content?.subtitle?.trim() || t('subtitle'),
+    applyNow: content?.applyNowLabel?.trim() || t('applyNow'),
+    openApplication: content?.openApplicationLabel?.trim() || t('openApplication'),
+    sendCV: content?.sendCVLabel?.trim() || t('sendCV'),
+    applicationSubject: content?.applicationSubjectPrefix?.trim() || t('applicationSubject'),
+    openApplicationSubject: content?.openApplicationSubject?.trim() || t('openApplicationSubject'),
+  }
 
   return (
     <section id="jobs" className="bg-[#9b5026] py-12 sm:py-20 lg:py-[120px]">
@@ -27,17 +49,17 @@ export default async function Jobs({ jobs = [], contactEmail = 'hello@netherland
                 className="font-['Anton',sans-serif] text-[#eee6d9] uppercase"
                 style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
               >
-                {t('heading')}
+                {text.heading}
               </h2>
               <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[20px] leading-[30px] max-w-[646px]">
-                {t('subtitle')}
+                {text.subtitle}
               </p>
             </div>
             <a
-              href={`mailto:${contactEmail}?subject=${encodeURIComponent(t('openApplicationSubject'))}`}
+              href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.openApplicationSubject)}`}
               className="inline-flex items-center justify-center bg-white text-[#1e170e] px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#eee6d9] transition-colors shrink-0 lg:w-[372px]"
             >
-              {hasOpenJobs ? t('openApplication') : t('sendCV')}
+              {hasOpenJobs ? text.openApplication : text.sendCV}
             </a>
           </div>
 
@@ -55,10 +77,10 @@ export default async function Jobs({ jobs = [], contactEmail = 'hello@netherland
                     </p>
                   )}
                   <a
-                    href={`mailto:${contactEmail}?subject=${encodeURIComponent(t('applicationSubject') + job.title)}`}
+                    href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.applicationSubject + job.title)}`}
                     className="inline-block mt-4 text-white font-['Inter',sans-serif] text-[16px] font-medium underline hover:no-underline transition-all"
                   >
-                    {t('applyNow')}
+                    {text.applyNow}
                   </a>
                 </div>
               ))}

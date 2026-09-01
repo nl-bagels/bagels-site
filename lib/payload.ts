@@ -15,6 +15,11 @@ export async function getSiteSettings(locale: Locale = 'en') {
   return payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: 'en' })
 }
 
+export async function getHomepageContent(locale: Locale = 'en') {
+  const payload = await getPayloadClient()
+  return payload.findGlobal({ slug: 'homepage-content', locale, fallbackLocale: 'en' })
+}
+
 export async function getActiveHero() {
   const payload = await getPayloadClient()
   const result = await payload.find({

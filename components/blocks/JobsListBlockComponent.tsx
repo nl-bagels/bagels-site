@@ -1,7 +1,10 @@
-export default function JobsListBlockComponent({ block, openJobs = [], siteSettings }: { block: any; openJobs?: any[]; siteSettings?: any }) {
+import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
+
+export default async function JobsListBlockComponent({ block, openJobs = [], siteSettings }: { block: any; openJobs?: any[]; siteSettings?: any }) {
+  const t = await getTranslations('jobs')
   const email = siteSettings?.contactEmail ?? 'hello@netherlandsbagels.com'
   const hasOpenJobs = openJobs.length > 0
-  const applyPrefix = block.applicationSubjectPrefix ?? 'Application: '
   const openSubject = block.openApplicationSubject ?? 'Open Application'
 
   return (
@@ -15,10 +18,9 @@ export default function JobsListBlockComponent({ block, openJobs = [], siteSetti
               {openJobs.map((job: any) => (
                 <div key={job.id} className="border border-stone-200 p-6">
                   <h3 className="font-['Outfit',sans-serif] font-semibold text-xl text-black mb-2">{job.title}</h3>
-                  {job.description && <p className="font-['Inter',sans-serif] text-[#4a5565] text-base">{job.description}</p>}
-                  <a href={`mailto:${email}?subject=${encodeURIComponent(applyPrefix + job.title)}`} className="inline-block mt-4 text-[#3a7d44] font-['Inter',sans-serif] text-sm font-medium hover:underline">
-                    {block.applyNowLabel ?? 'Apply now →'}
-                  </a>
+                  <Link href={`/jobs/${encodeURIComponent(String(job.id))}`} className="inline-block mt-4 text-[#3a7d44] font-['Inter',sans-serif] text-sm font-medium hover:underline">
+                    {t('viewDetails')}
+                  </Link>
                 </div>
               ))}
             </div>

@@ -2,17 +2,63 @@ import { getTranslations } from 'next-intl/server'
 
 interface CateringProps {
   contactEmail?: string
+  content?: {
+    heading?: string | null
+    tagline?: string | null
+    ctaLabel?: string | null
+    emailSubject?: string | null
+    addons?: string | null
+    orderNote?: string | null
+    orderContact?: string | null
+    deliveryHeading?: string | null
+    deliveryPickup?: string | null
+    deliveryLocal?: string | null
+    deliveryNL?: string | null
+    priceNote?: string | null
+    b2bNote?: string | null
+    packages?: Array<{
+      name?: string | null
+      items?: Array<{ item?: string | null } | null> | null
+    } | null> | null
+  } | null
 }
 
 const packageKeys = ['basic', 'super', 'brunch', 'deluxe'] as const
 
-export default async function Catering({ contactEmail = 'hello@netherlandsbagels.com' }: CateringProps) {
+export default async function Catering({
+  contactEmail = 'hello@netherlandsbagels.com',
+  content,
+}: CateringProps) {
   const t = await getTranslations('catering')
 
-  const packages = packageKeys.map((key) => ({
+  const fallbackPackages = packageKeys.map((key) => ({
     name: t(`packages.${key}.name`),
     items: t.raw(`packages.${key}.items`) as string[],
   }))
+  const cmsPackages = (content?.packages ?? [])
+    .filter((pkg): pkg is NonNullable<typeof pkg> => Boolean(pkg?.name?.trim()))
+    .map((pkg) => ({
+      name: pkg.name!.trim(),
+      items: (pkg.items ?? [])
+        .map((item) => item?.item?.trim())
+        .filter((item): item is string => Boolean(item)),
+    }))
+  const packages = cmsPackages.length > 0 ? cmsPackages : fallbackPackages
+  const text = {
+    heading: content?.heading?.trim() || t('heading'),
+    tagline: content?.tagline?.trim() || t('tagline'),
+    ctaLabel: content?.ctaLabel?.trim() || t('cta'),
+    emailSubject: content?.emailSubject?.trim() || 'Catering Inquiry',
+    addons: content?.addons?.trim() || t('addons'),
+    orderNote: content?.orderNote?.trim() || t('orderNote'),
+    orderContact: content?.orderContact?.trim() || t('orderContact'),
+    deliveryHeading: content?.deliveryHeading?.trim() || t('deliveryHeading'),
+    deliveryPickup: content?.deliveryPickup?.trim() || t('deliveryPickup'),
+    deliveryLocal: content?.deliveryLocal?.trim() || t('deliveryLocal'),
+    deliveryNL: content?.deliveryNL?.trim() || t('deliveryNL'),
+    priceNote: content?.priceNote?.trim() || t('priceNote'),
+    b2bNote: content?.b2bNote?.trim() || t('b2bNote'),
+  }
 
   return (
     <section id="catering" className="bg-[#eee6d9] px-3 sm:px-4 lg:px-6">
@@ -24,10 +70,10 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
             className="font-['Anton',sans-serif] uppercase"
             style={{ fontSize: 'clamp(28px, 4vw, 60px)', lineHeight: '1.2' }}
           >
-            {t('heading')}
+            {text.heading}
           </h2>
           <p className="font-['Inter',sans-serif] font-normal text-base sm:text-[20px] leading-relaxed sm:leading-[28px]">
-            {t('tagline')}
+            {text.tagline}
           </p>
         </div>
 
@@ -69,15 +115,15 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
 
         {/* Add-ons callout */}
         <p className="font-['Anton',sans-serif] text-[#eee6d9] text-[22px] uppercase text-center tracking-wide">
-          {t('addons')}
+          {text.addons}
         </p>
 
         {/* CTA */}
         <a
-          href={`mailto:${contactEmail}?subject=Catering Inquiry`}
+          href={`mailto:${contactEmail}?subject=${encodeURIComponent(text.emailSubject)}`}
           className="inline-flex items-center justify-center bg-white text-[#1e170e] px-10 py-4 text-[20px] font-['Inter',sans-serif] rounded-[16px] hover:bg-[#eee6d9] transition-colors"
         >
-          {t('cta')}
+          {text.ctaLabel}
         </a>
 
         {/* Order & Delivery info */}
@@ -85,34 +131,34 @@ export default async function Catering({ contactEmail = 'hello@netherlandsbagels
           {/* Order note */}
           <div className="bg-white/10 rounded-[16px] px-8 py-6 flex flex-col gap-2">
             <p className="font-['Inter',sans-serif] font-semibold text-[#eee6d9] text-[15px]">
-              {t('orderNote')}
+              {text.orderNote}
             </p>
             <p className="font-['Inter',sans-serif] text-[#b39978] text-[14px]">
-              {t('orderContact')}
+              {text.orderContact}
             </p>
           </div>
 
           {/* Delivery */}
           <div className="flex flex-col gap-2 text-[#eee6d9]">
             <p className="font-['Anton',sans-serif] text-[18px] uppercase tracking-wide">
-              {t('deliveryHeading')}
+              {text.deliveryHeading}
             </p>
             <ul className="flex flex-col gap-1">
-              {(['deliveryPickup', 'deliveryLocal', 'deliveryNL'] as const).map((key) => (
-                <li key={key} className="font-['Inter',sans-serif] text-[14px] text-[#b39978]">
-                  {t(key)}
+              {[text.deliveryPickup, text.deliveryLocal, text.deliveryNL].map((item) => (
+                <li key={item} className="font-['Inter',sans-serif] text-[14px] text-[#b39978]">
+                  {item}
                 </li>
               ))}
             </ul>
             <p className="font-['Inter',sans-serif] text-[12px] text-[#b39978]/60 mt-1">
-              {t('priceNote')}
+              {text.priceNote}
             </p>
           </div>
         </div>
 
         {/* B2B note */}
         <p className="font-['Inter',sans-serif] text-[14px] text-[#b39978] text-center max-w-[480px]">
-          {t('b2bNote')}
+          {text.b2bNote}
         </p>
       </div>
     </section>

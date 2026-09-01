@@ -8,7 +8,13 @@ import Catering from '@/components/sections/Catering'
 import Location from '@/components/sections/Location'
 import Jobs from '@/components/sections/Jobs'
 import BlockRenderer from '@/components/blocks/BlockRenderer'
-import { getActiveHero, getOpenJobs, getSiteSettings, getPageBySlug } from '@/lib/payload'
+import {
+  getActiveHero,
+  getHomepageContent,
+  getOpenJobs,
+  getPageBySlug,
+  getSiteSettings,
+} from '@/lib/payload'
 
 export const revalidate = 60
 
@@ -24,13 +30,15 @@ export default async function HomePage({
   let hero = null
   let openJobs: Awaited<ReturnType<typeof getOpenJobs>> = []
   let settings: Awaited<ReturnType<typeof getSiteSettings>> | null = null
+  let homepageContent: Awaited<ReturnType<typeof getHomepageContent>> | null = null
   let homePage = null
 
   try {
-    ;[hero, openJobs, settings, homePage] = await Promise.all([
+    ;[hero, openJobs, settings, homepageContent, homePage] = await Promise.all([
       getActiveHero(),
       getOpenJobs(),
       getSiteSettings(payloadLocale),
+      getHomepageContent(payloadLocale),
       getPageBySlug('/', payloadLocale),
     ])
   } catch {
@@ -62,9 +70,9 @@ export default async function HomePage({
     <>
       {/* 1. Hero — dark rounded card */}
       <Hero
-        title={hero?.title ?? t('title')}
-        subtitle={hero?.subtitle ?? t('subtitle')}
-        ctaLabel={hero?.ctaLabel ?? t('cta')}
+        title={homepageContent?.hero?.title?.trim() || hero?.title || t('title')}
+        subtitle={homepageContent?.hero?.subtitle?.trim() || hero?.subtitle || t('subtitle')}
+        ctaLabel={homepageContent?.hero?.ctaLabel?.trim() || hero?.ctaLabel || t('cta')}
         ctaUrl={hero?.ctaUrl ?? settings?.reservationUrl ?? '#'}
         backgroundImageUrl={heroImage}
         backgroundVideo={hero?.backgroundVideo ?? undefined}
@@ -72,19 +80,26 @@ export default async function HomePage({
       />
 
       {/* 2. Marquee ticker — brown strip */}
-      <Marquee />
+      <Marquee
+        items={(homepageContent?.marquee?.items ?? [])
+          .map((item: { text?: string | null }) => item.text?.trim())
+          .filter((item: string | undefined): item is string => Boolean(item))}
+      />
 
       {/* 3. MenuHighlight — "New Fresh Summer Menu" with overlapping photos */}
-      <MenuHighlight />
+      <MenuHighlight content={homepageContent?.menuHighlight} />
 
       {/* 4. About — brown #9b5026 section with logo + heading */}
-      <About />
+      <About content={homepageContent?.about} />
 
       {/* 5. OurMenu — 4 dark category cards on vanilla bg */}
-      <MenuPreview />
+      <MenuPreview locale={payloadLocale} content={homepageContent?.menuPreview} />
 
       {/* 6. Catering — dark rounded card with 4 white package tiles */}
-      <Catering contactEmail={settings?.contactEmail ?? undefined} />
+      <Catering
+        contactEmail={settings?.contactEmail ?? undefined}
+        content={homepageContent?.catering}
+      />
 
       {/* 7. Visit Us — map + address/hours/contact */}
       <Location
@@ -92,6 +107,7 @@ export default async function HomePage({
         phone={settings?.phone ?? undefined}
         whatsapp={settings?.whatsapp ?? undefined}
         email={settings?.contactEmail ?? undefined}
+        content={homepageContent?.location}
       />
 
       {/* 8. Join Our Team — brown section with photos */}
@@ -101,6 +117,7 @@ export default async function HomePage({
           title: j.title,
         }))}
         contactEmail={settings?.contactEmail ?? undefined}
+        content={homepageContent?.jobs}
       />
     </>
   )

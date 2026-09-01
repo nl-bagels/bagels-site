@@ -16,6 +16,7 @@ import { Announcements } from "./payload/collections/Announcements.ts";
 import { SiteSettings } from "./payload/globals/SiteSettings.ts";
 import { Navigation } from "./payload/globals/Navigation.ts";
 import { FooterContent } from "./payload/globals/FooterContent.ts";
+import { HomepageContent } from "./payload/globals/HomepageContent.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -52,7 +53,7 @@ export default buildConfig({
       fields: [],
     },
   ],
-  globals: [SiteSettings, Navigation, FooterContent],
+  globals: [HomepageContent, SiteSettings, Navigation, FooterContent],
   db: postgresAdapter({
     pool: {
       connectionString:

@@ -3,10 +3,19 @@ import { getTranslations } from 'next-intl/server'
 
 interface AboutProps {
   imageUrl?: string
+  content?: {
+    heading?: string | null
+    paragraphOne?: string | null
+    paragraphTwo?: string | null
+  } | null
 }
 
-export default async function About({ imageUrl }: AboutProps) {
+export default async function About({ imageUrl, content }: AboutProps) {
   const t = await getTranslations('about')
+  const heading = content?.heading?.trim() || t('heading')
+  const headingLines = heading.split('\n')
+  const paragraphOne = content?.paragraphOne?.trim() || t('p1')
+  const paragraphTwo = content?.paragraphTwo?.trim() || t('p2')
 
   return (
     <section id="about" className="bg-[#9b5026] py-12 sm:py-20 lg:py-[120px]">
@@ -25,7 +34,12 @@ export default async function About({ imageUrl }: AboutProps) {
                 className="font-['Anton',sans-serif] text-white uppercase"
                 style={{ fontSize: 'clamp(36px, 10vw, 56px)', lineHeight: '0.925' }}
               >
-                No-Nonsense<br />New York Bagels
+                {headingLines.map((line, index) => (
+                  <span key={`${line}-${index}`}>
+                    {line}
+                    {index < headingLines.length - 1 && <br />}
+                  </span>
+                ))}
               </h2>
             </div>
 
@@ -49,7 +63,12 @@ export default async function About({ imageUrl }: AboutProps) {
                   width: '552px', zIndex: 2, position: 'relative',
                 }}
               >
-                No-Nonsense<br />New York Bagels
+                {headingLines.map((line, index) => (
+                  <span key={`${line}-${index}`}>
+                    {line}
+                    {index < headingLines.length - 1 && <br />}
+                  </span>
+                ))}
               </h2>
             </div>
 
@@ -58,10 +77,10 @@ export default async function About({ imageUrl }: AboutProps) {
           {/* Body text */}
           <div className="flex flex-col gap-3 text-center w-full">
             <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[20px] leading-[28px]">
-              {t('p1')}
+              {paragraphOne}
             </p>
             <p className="font-['Inter',sans-serif] text-[#eee6d9] text-[20px] leading-[28px]">
-              {t('p2')}
+              {paragraphTwo}
             </p>
           </div>
 

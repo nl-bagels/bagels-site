@@ -1,7 +1,7 @@
 'use client'
 
 interface MarqueeProps {
-  text?: string
+  items?: string[]
 }
 
 const BAGEL_ICON = (
@@ -28,7 +28,9 @@ const ITEMS = [
   'Netherlands Bagels',
 ]
 
-export default function Marquee() {
+export default function Marquee({ items }: MarqueeProps) {
+  const tickerItems = items?.filter(Boolean).length ? items.filter(Boolean) : ITEMS
+
   return (
     <div className="bg-[#b39978] h-[62px] overflow-hidden relative w-full">
       <div className="absolute inset-0 flex items-center">
@@ -37,7 +39,7 @@ export default function Marquee() {
           style={{ width: 'max-content' }}
         >
           {/* Doubled for seamless loop */}
-          {[...ITEMS, ...ITEMS].map((item, i) => (
+          {[...tickerItems, ...tickerItems].map((item, i) => (
             <div key={i} className="flex items-center gap-8 shrink-0">
               <span
                 className="font-['Anton',sans-serif] text-[#eee6d9] uppercase text-[28px] leading-none whitespace-nowrap"

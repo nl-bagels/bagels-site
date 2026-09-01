@@ -5,6 +5,17 @@ interface LocationProps {
   phone?: string
   whatsapp?: string
   email?: string
+  content?: {
+    heading?: string | null
+    addressLabel?: string | null
+    hoursLabel?: string | null
+    contactLabel?: string | null
+    whatsappLabel?: string | null
+    openingHours?: Array<{
+      day?: string | null
+      hours?: string | null
+    } | null> | null
+  } | null
 }
 
 export default async function Location({
@@ -12,15 +23,27 @@ export default async function Location({
   phone = '+31 12 345 6789',
   whatsapp,
   email = 'hello@netherlandsbagels.com',
+  content,
 }: LocationProps) {
   const t = await getTranslations('location')
   const addressLines = address.split(',').map((l) => l.trim())
 
-  const hours = [
+  const fallbackHours = [
     { day: t('days.weekdays'), hours: '7:00 AM – 6:00 PM' },
     { day: t('days.saturday'), hours: '8:00 AM – 6:00 PM' },
     { day: t('days.sunday'), hours: '8:00 AM – 5:00 PM' },
   ]
+  const cmsHours = (content?.openingHours ?? [])
+    .filter((item): item is NonNullable<typeof item> => Boolean(item?.day?.trim() && item?.hours?.trim()))
+    .map((item) => ({ day: item.day!.trim(), hours: item.hours!.trim() }))
+  const hours = cmsHours.length > 0 ? cmsHours : fallbackHours
+  const labels = {
+    heading: content?.heading?.trim() || t('heading'),
+    address: content?.addressLabel?.trim() || t('address'),
+    hours: content?.hoursLabel?.trim() || t('hours'),
+    contact: content?.contactLabel?.trim() || t('contact'),
+    whatsapp: content?.whatsappLabel?.trim() || t('whatsapp'),
+  }
 
   return (
     <section id="contact" className="bg-[#eee6d9] py-12 sm:py-20 lg:py-[120px]">
@@ -47,13 +70,13 @@ export default async function Location({
               className="font-['Anton',sans-serif] text-[#1e170e] uppercase"
               style={{ fontSize: 'clamp(40px, 5vw, 60px)', lineHeight: '64px' }}
             >
-              {t('heading')}
+              {labels.heading}
             </h2>
 
             {/* Address */}
             <div className="flex flex-col gap-2">
               <h3 className="font-['Inter',sans-serif] font-bold text-[24px] text-[#1e170e] leading-[36px]">
-                {t('address')}
+                {labels.address}
               </h3>
               <div className="flex flex-col font-['Inter',sans-serif] text-[18px] leading-[28px] text-[#484037]">
                 {addressLines.map((line, i) => (
@@ -65,7 +88,7 @@ export default async function Location({
             {/* Hours */}
             <div className="flex flex-col gap-2">
               <h3 className="font-['Inter',sans-serif] font-bold text-[24px] text-[#1e170e] leading-[36px]">
-                {t('hours')}
+                {labels.hours}
               </h3>
               <div className="flex flex-col gap-1 text-[18px] text-[#484037]">
                 {hours.map(({ day, hours: h }) => (
@@ -80,7 +103,7 @@ export default async function Location({
             {/* Contact */}
             <div className="flex flex-col gap-2">
               <h3 className="font-['Inter',sans-serif] font-bold text-[24px] text-[#1e170e] leading-[36px]">
-                {t('contact')}
+                {labels.contact}
               </h3>
               <div className="flex flex-col font-['Inter',sans-serif] text-[18px] text-[#484037]">
                 <a
@@ -96,7 +119,7 @@ export default async function Location({
                     rel="noopener noreferrer"
                     className="text-[16px] leading-[24px] hover:text-[#9b5026] transition-colors"
                   >
-                    {t('whatsapp')}
+                    {labels.whatsapp}
                   </a>
                 )}
                 <a
